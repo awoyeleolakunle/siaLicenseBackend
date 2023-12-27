@@ -1,0 +1,11 @@
+package dansarkitechnology.sialicensebackend.services.bookTraining;
+
+import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
+import dansarkitechnology.sialicensebackend.dtos.request.BookTrainingSessionRequest;
+import dansarkitechnology.sialicensebackend.exceptions.ApplicantException;
+import dansarkitechnology.sialicensebackend.exceptions.CenterException;
+import dansarkitechnology.sialicensebackend.exceptions.TrainingSessionException;
+
+public interface BookTrainingService {
+    ApiResponse bookTraining(BookTrainingSessionRequest bookTrainingSessionRequest) throws TrainingSessionException, CenterException, ApplicantException;
+}
