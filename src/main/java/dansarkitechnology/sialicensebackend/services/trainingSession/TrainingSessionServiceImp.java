@@ -14,7 +14,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -31,11 +34,15 @@ public class TrainingSessionServiceImp implements TrainingSessionService {
     @Transactional
     public ApiResponse createTrainingSession(TrainingSessionRequest trainingSessionRequest) {
 
+        Center center = centerService.findCenterByEmailAddress(trainingSessionRequest.getCenterEmailAddress());
+        System.out.println("I'm the center email address : "+ trainingSessionRequest.getCenterEmailAddress());
         TrainingSession trainingSession = modelMapper.map(trainingSessionRequest, TrainingSession.class);
         trainingSession.setTrainingType(TrainingType.valueOf(trainingSessionRequest.getTrainingType().toUpperCase()));
+        trainingSession.setCenterCity(center.getCity());
+        trainingSession.setCenterName(center.getCenterName());
+        trainingSession.setCenterAddress(center.getAddress());
         TrainingSession savedTrainingSession = trainingSessionRepository.save(trainingSession);
 
-        Center center = centerService.findCenterByEmailAddress(trainingSessionRequest.getCenterEmailAddress());
         Set<TrainingSession> setOfTrainingSession = center.getSetOfTrainingSession();
         setOfTrainingSession.add(savedTrainingSession);
         center.setSetOfTrainingSession(new HashSet<>(setOfTrainingSession));
@@ -46,6 +53,12 @@ public class TrainingSessionServiceImp implements TrainingSessionService {
     @Override
     public Optional<TrainingSession> findTrainingSessionById(Long trainingId) {
         return trainingSessionRepository.findById(trainingId);
+    }
+
+    @Override
+    public List<TrainingSession> findAllAvailableTrainingSessionUnderAtTrainingType(String trainingType) {
+        LocalDate currentDate = LocalDate.now();
+        return trainingSessionRepository.findByTrainingTypeAndStartDateAfter(TrainingType.valueOf(trainingType), currentDate);
     }
 }
 

@@ -28,4 +28,5 @@ public class TrainingSession {
     private String centerName;
     private String centerEmailAddress;
     private String centerCity;
+    private String centerAddress;
 }

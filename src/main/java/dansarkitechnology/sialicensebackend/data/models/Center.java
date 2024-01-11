@@ -19,7 +19,7 @@ public class Center {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
     private String centerName;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private User user;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<TrainingSession> setOfTrainingSession;

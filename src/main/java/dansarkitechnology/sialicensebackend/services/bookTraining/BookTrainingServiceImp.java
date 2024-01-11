@@ -39,9 +39,8 @@ public class BookTrainingServiceImp implements BookTrainingService{
 
         Applicant applicant = applicantService.findApplicantByEmailAddress(bookTrainingSessionRequest.getApplicantEmailAddress());
         Applicant validatedApplicant =  validateApplicant(applicant);
-        Optional<Center> center = centerService.findCenterById(bookTrainingSessionRequest.getCenterId());
+        Center center = centerService.findCenterByEmailAddress(bookTrainingSessionRequest.getCenterEmailAddress());
         Center validatedCenter = validateCenter(center);
-
 
         Optional<TrainingSession> trainingSession = trainingSessionService.findTrainingSessionById(bookTrainingSessionRequest.getTrainingId());
        TrainingSession validatedTrainingSession =  validateTrainingSession(trainingSession);
@@ -65,9 +64,9 @@ public class BookTrainingServiceImp implements BookTrainingService{
         return applicant;
     }
 
-    private Center validateCenter(Optional<Center> center) throws CenterException {
-        if(center.isEmpty()) throw new CenterException(GenerateApiResponse.CENTER_NOT_FOUND);
-        return center.get();
+    private Center validateCenter(Center center) throws CenterException {
+        if(center==null) throw new CenterException(GenerateApiResponse.CENTER_NOT_FOUND);
+        return center;
     }
 
     private BookedTraining createNewBookedTraining(TrainingSession trainingSession, Applicant applicant, Center center){

@@ -1,6 +1,5 @@
 package dansarkitechnology.sialicensebackend.dtos.request;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class LoginRequest {
-    private String emailAddress;
-    private String password;
+public class BlogPostStatusUpdateRequest {
+    private Long id;
+    private String blogPostStatus;
 }

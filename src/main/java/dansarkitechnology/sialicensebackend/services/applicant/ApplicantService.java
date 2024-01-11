@@ -8,4 +8,6 @@ public interface ApplicantService {
     Applicant saveApplicant(Applicant applicant);
 
     Applicant findApplicantByEmailAddress(String emailAddress);
+
+    ApiResponse findApplicantDetails(String applicantEmailAddress);
 }

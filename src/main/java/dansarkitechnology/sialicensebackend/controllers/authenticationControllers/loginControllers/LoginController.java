@@ -6,13 +6,13 @@ import dansarkitechnology.sialicensebackend.dtos.request.LoginRequest;
 import dansarkitechnology.sialicensebackend.exceptions.AccountException;
 import dansarkitechnology.sialicensebackend.services.authentication.LoginService;
 import lombok.AllArgsConstructor;
-import org.hibernate.boot.jaxb.Origin;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/sialicense+/")
+@RequestMapping("api/v1/sialicence+/")
 @CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class LoginController {

@@ -1,4 +1,4 @@
-package dansarkitechnology.sialicensebackend.controllers.authenticationControllers.registrationControllers;
+package dansarkitechnology.sialicensebackend.controllers.applicantControllers;
 
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 
 
-public class ApplicantController {
+public class ApplicantRegisterController {
 
     private final ApplicantRegistrationService applicantRegistration;
 

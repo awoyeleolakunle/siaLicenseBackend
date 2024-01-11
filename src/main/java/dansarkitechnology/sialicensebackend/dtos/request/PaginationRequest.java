@@ -1,6 +1,5 @@
 package dansarkitechnology.sialicensebackend.dtos.request;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+public class PaginationRequest {
 
-public class LoginRequest {
-    private String emailAddress;
-    private String password;
+    private int pageNumber;
+    private int pageSize;
 }

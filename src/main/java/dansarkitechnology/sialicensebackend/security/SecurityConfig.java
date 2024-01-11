@@ -25,7 +25,9 @@ public class SecurityConfig {
     private final String[] allowedEndPoints = {
             "/api/v1/sialicence+/center/register" , "/api/v1/sialicence+/applicant/register",
            "/api/v1/sialicence+/center/createTrainingSession", "/api/v1/sialicence+/applicant/bookTraining",
-            "/api/v1/sialicence+/center/aCenterAllTrainingSessions", "/api/v1/sialicense+/login"
+            "/api/v1/sialicence+/center/aCenterAllTrainingSessions", "/api/v1/sialicence+/login",
+            "/api/v1/sialicence+/trainingSession/allAvailableTrainingSessionUnderTrainingType",
+            "/api/v1/sialicence+/applicant/applicantDetails", "/api/v1/sialicence+/blog/blogPostCreation"
     };
 
     private final String[] centerEndpoints = {

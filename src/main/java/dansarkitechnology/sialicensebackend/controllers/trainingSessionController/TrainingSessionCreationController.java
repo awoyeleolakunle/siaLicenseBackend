@@ -1,4 +1,4 @@
-package dansarkitechnology.sialicensebackend.controllers;
+package dansarkitechnology.sialicensebackend.controllers.trainingSessionController;
 
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping ("api/v1/sialicence+/center/")
 @CrossOrigin(origins= "*")
 @AllArgsConstructor
-public class TrainingSessionController {
+public class TrainingSessionCreationController {
     private final TrainingSessionService trainingSessionService;
 
     @PostMapping("createTrainingSession")

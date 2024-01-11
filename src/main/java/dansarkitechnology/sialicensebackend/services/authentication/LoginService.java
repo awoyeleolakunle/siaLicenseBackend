@@ -24,8 +24,9 @@ public class LoginService {
 
 
     public ApiResponse login(LoginRequest loginRequest) throws AccountException {
+        System.out.println("i was called ");
         authenticate(loginRequest);
-        UserDetails userDetails =userDetailsService.loadUserByUsername(loginRequest.getEmailAdress());
+        UserDetails userDetails =userDetailsService.loadUserByUsername(loginRequest.getEmailAddress());
         if(userDetails==null) throw new AccountException(GenerateApiResponse.ACCOUNT_NOT_FOUND);
         String jwt = jwtService.generateToken(userDetails);
         System.out.println("I'm the jwt : " + jwt);
@@ -34,6 +35,7 @@ public class LoginService {
     }
 
     private void authenticate(LoginRequest loginRequest) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmailAdress(), loginRequest.getPassword()));
+        System.out.println("I'm the login email : "+ loginRequest.getEmailAddress());
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmailAddress(), loginRequest.getPassword()));
     }
 }

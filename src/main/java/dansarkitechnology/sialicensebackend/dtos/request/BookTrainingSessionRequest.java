@@ -13,5 +13,5 @@ import lombok.Setter;
 public class BookTrainingSessionRequest {
     private Long trainingId;
     private String applicantEmailAddress;
-    private Long centerId;
+    private String centerEmailAddress;
 }

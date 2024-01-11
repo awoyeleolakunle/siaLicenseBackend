@@ -1,7 +1,6 @@
 package dansarkitechnology.sialicensebackend.services.bookTraining;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dansarkitechnology.sialicensebackend.data.models.BookedTraining;
 import dansarkitechnology.sialicensebackend.dtos.request.BookTrainingSessionRequest;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
@@ -12,10 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-
 
 
 @SpringBootTest
@@ -35,7 +30,7 @@ class BookTrainingServiceImpTest {
 
         BookTrainingSessionRequest bookTrainingSessionRequest = new BookTrainingSessionRequest();
         bookTrainingSessionRequest.setTrainingId(1L);
-        bookTrainingSessionRequest.setCenterId(1L);
+        bookTrainingSessionRequest.setCenterEmailAddress(String.valueOf(1L));
         bookTrainingSessionRequest.setApplicantEmailAddress("emailAddress@gmail.com");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/sialicence+/applicant/bookTraining")

@@ -2,6 +2,7 @@ package dansarkitechnology.sialicensebackend.services.applicant;
 
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
+import dansarkitechnology.sialicensebackend.Utils.GenerateApiResponse;
 import dansarkitechnology.sialicensebackend.data.models.Applicant;
 import dansarkitechnology.sialicensebackend.data.repositories.ApplicantRepository;
 ;
@@ -21,5 +22,12 @@ public class ApplicationServiceImp implements ApplicantService {
     @Override
     public Applicant findApplicantByEmailAddress(String emailAddress) {
         return applicantRepository.findByUser_EmailAddress(emailAddress);
+    }
+
+    @Override
+    public ApiResponse findApplicantDetails(String applicantEmailAddress) {
+        var foundApplicantDetails = findApplicantByEmailAddress(applicantEmailAddress);
+        System.out.println("I'm the found applicant : "+ foundApplicantDetails);
+        return GenerateApiResponse.found(foundApplicantDetails);
     }
 }
