@@ -2,6 +2,7 @@ package dansarkitechnology.sialicensebackend.controllers.blogControllers;
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.dtos.request.BlogPostStatusUpdateRequest;
+import dansarkitechnology.sialicensebackend.exceptions.BlogException;
 import dansarkitechnology.sialicensebackend.services.blog.blogPostStatusUpdate.BlogPostStatusUpdateService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ public class BlogPostStatusUpdateController {
     private final BlogPostStatusUpdateService blogPostStatusUpdateService;
 
     @PatchMapping("blogPostStatusUpdate")
-    public ResponseEntity<ApiResponse> updateBlogPostBlogStatus(@RequestBody BlogPostStatusUpdateRequest blogPostStatusUpdateRequest){
+    public ResponseEntity<ApiResponse> updateBlogPostBlogStatus(@RequestBody BlogPostStatusUpdateRequest blogPostStatusUpdateRequest) throws BlogException {
         return new ResponseEntity<>(blogPostStatusUpdateService.updateBlogPostBlogStatus(blogPostStatusUpdateRequest), HttpStatus.OK);
     }
 }

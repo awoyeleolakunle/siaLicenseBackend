@@ -2,10 +2,18 @@ package dansarkitechnology.sialicensebackend.exceptions;
 
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
+import dansarkitechnology.sialicensebackend.Utils.GenerateApiResponse;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -39,5 +47,38 @@ public class GlobalExceptionHandler {
             .statusCode(HttpStatus.BAD_REQUEST.value())
             .isSuccessful(false)
             .build(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BlogException.class)
+    public ResponseEntity<ApiResponse> blogException(BlogException blogException){
+        return new ResponseEntity<>(ApiResponse.builder()
+                .data(blogException.getMessage())
+                .httpStatus(HttpStatus.BAD_REQUEST)
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .isSuccessful(false)
+                .build(), HttpStatus.BAD_REQUEST);
+}
+
+   // @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiResponse> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+//        Map<String, String> errors = new HashMap<>();
+//        ex.getBindingResult().getAllErrors().forEach((error) -> {
+//            String fieldName = ((FieldError) error).getField();
+//            String errorMessage = error.getDefaultMessage();
+//            errors.put(fieldName, errorMessage);
+
+//            String firstErrorMessage = ex.getBindingResult().getAllErrors().stream()
+//                    .findFirst()
+//                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+//                    .orElse(GenerateApiResponse.FILL_ALL_FIELDS);
+
+        return new ResponseEntity<>(ApiResponse.builder()
+                .data(GenerateApiResponse.FILL_ALL_FIELDS)
+                .httpStatus(HttpStatus.BAD_REQUEST)
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .isSuccessful(false)
+                .build(), HttpStatus.BAD_REQUEST);
     }
 }

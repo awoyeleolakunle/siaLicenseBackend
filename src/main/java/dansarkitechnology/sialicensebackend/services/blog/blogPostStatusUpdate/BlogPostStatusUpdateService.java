@@ -2,7 +2,8 @@ package dansarkitechnology.sialicensebackend.services.blog.blogPostStatusUpdate;
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.dtos.request.BlogPostStatusUpdateRequest;
+import dansarkitechnology.sialicensebackend.exceptions.BlogException;
 
 public interface BlogPostStatusUpdateService {
-    ApiResponse updateBlogPostBlogStatus(BlogPostStatusUpdateRequest blogPostStatusUpdateRequest);
+    ApiResponse updateBlogPostBlogStatus(BlogPostStatusUpdateRequest blogPostStatusUpdateRequest) throws BlogException;
 }

@@ -31,7 +31,7 @@ class LoginServiceTest {
 
 
         LoginRequest loginRequest  = new LoginRequest();
-        loginRequest.setEmailAdress("johnsyke@gmail.com");
+        loginRequest.setEmailAddress("johnsyke@gmail.com");
         loginRequest.setPassword("password");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/sialicense+/login")

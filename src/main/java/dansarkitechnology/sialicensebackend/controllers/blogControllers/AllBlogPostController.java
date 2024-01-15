@@ -1,6 +1,7 @@
 package dansarkitechnology.sialicensebackend.controllers.blogControllers;
 
 import dansarkitechnology.sialicensebackend.data.models.BlogPost;
+import dansarkitechnology.sialicensebackend.dtos.request.PaginationRequest;
 import dansarkitechnology.sialicensebackend.services.blog.blogPostService.BlogPostService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,17 +13,14 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/sialicence+/blog/")
 @CrossOrigin(origins = "*")
- @AllArgsConstructor
-public class AllActivePostController {
-
+@AllArgsConstructor
+public class AllBlogPostController {
     private final BlogPostService blogPostService;
 
-    @GetMapping("allActiveBlogPosts")
-    public ResponseEntity<List<BlogPost>> fetchAllActiveBlogPost(@RequestParam int pageSize, @RequestParam int pageNumber){
-
-        System.out.println(pageNumber);
-        System.out.println(pageSize);
-        return new ResponseEntity<>(blogPostService.findAllActiveBlogPost(pageSize, pageNumber), HttpStatus.OK);
-
-    }
+    @PostMapping("allBlogPosts")
+    public ResponseEntity<List<BlogPost>> fetchAllBlogPost(@RequestBody PaginationRequest paginationRequest){
+        System.out.println("I'm in");
+        System.out.println("I'm the pagination : " + paginationRequest.getPageNumber());
+        return new ResponseEntity<>(blogPostService.findAllBlogPost(paginationRequest), HttpStatus.OK);
+}
 }

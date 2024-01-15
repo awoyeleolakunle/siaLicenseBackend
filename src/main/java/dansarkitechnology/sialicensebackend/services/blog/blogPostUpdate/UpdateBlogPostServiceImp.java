@@ -5,6 +5,7 @@ import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.Utils.GenerateApiResponse;
 import dansarkitechnology.sialicensebackend.data.models.BlogPost;
 import dansarkitechnology.sialicensebackend.dtos.request.BlogPostUpdateRequest;
+import dansarkitechnology.sialicensebackend.exceptions.BlogException;
 import dansarkitechnology.sialicensebackend.services.blog.blogPostService.BlogPostService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,9 @@ public class UpdateBlogPostServiceImp implements UpdateBlogPostService{
     private final BlogPostService blogPostService;
 
     @Override
-    public ApiResponse updateBlogPost(BlogPostUpdateRequest blogPostUpdateRequest) {
+    public ApiResponse updateBlogPost(BlogPostUpdateRequest blogPostUpdateRequest) throws BlogException {
         Optional<BlogPost> blogPost = blogPostService.findByPostTitle(blogPostUpdateRequest.getPostTitle());
-        if(blogPost.isEmpty()) return GenerateApiResponse.blogPostNotFound(GenerateApiResponse.BLOG_POST_NOT_FOUND);
+        if(blogPost.isEmpty()) throw new BlogException(GenerateApiResponse.BLOG_POST_NOT_FOUND);
         updatePost(blogPost.get(), blogPostUpdateRequest);
         return GenerateApiResponse.updateSuccessful(GenerateApiResponse.STATUS_UPDATED_SUCCESSFULLY);
     }

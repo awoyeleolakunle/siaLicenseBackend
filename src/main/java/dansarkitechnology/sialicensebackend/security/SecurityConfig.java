@@ -27,7 +27,8 @@ public class SecurityConfig {
            "/api/v1/sialicence+/center/createTrainingSession", "/api/v1/sialicence+/applicant/bookTraining",
             "/api/v1/sialicence+/center/aCenterAllTrainingSessions", "/api/v1/sialicence+/login",
             "/api/v1/sialicence+/trainingSession/allAvailableTrainingSessionUnderTrainingType",
-            "/api/v1/sialicence+/applicant/applicantDetails", "/api/v1/sialicence+/blog/blogPostCreation"
+            "/api/v1/sialicence+/applicant/applicantDetails", "/api/v1/sialicence+/blog/blogPostCreation",
+            "/api/v1/sialicence+/blog/allActiveBlogPosts", "/api/v1/sialicence+/blog/allBlogPosts"
     };
 
     private final String[] centerEndpoints = {

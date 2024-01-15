@@ -23,6 +23,7 @@ public class GenerateApiResponse {
     public static final String BLOG_POST_NOT_FOUND = "Blog can not be found";
     public static final String STATUS_UPDATED_SUCCESSFULLY = "Status updated successfully";
     public static final String POST_SUCCESSFULLY_CREATED = "You have successfully created a post";
+    public static final String FILL_ALL_FIELDS = "Kindly fill all fields correctly" ;
 
 
     public static ApiResponse createdResponse(Object data){

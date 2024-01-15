@@ -7,6 +7,7 @@ import dansarkitechnology.sialicensebackend.data.enums.BlogStatus;
 import dansarkitechnology.sialicensebackend.data.models.BlogPost;
 import dansarkitechnology.sialicensebackend.dtos.request.BlogCreationRequest;
 import dansarkitechnology.sialicensebackend.dtos.request.BlogPostUpdateRequest;
+import dansarkitechnology.sialicensebackend.exceptions.BlogException;
 import dansarkitechnology.sialicensebackend.services.blog.blogPostUpdate.UpdateBlogPostService;
 import dansarkitechnology.sialicensebackend.services.blog.blogPostService.BlogPostService;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class BlogPostCreationServiceImp implements BlogPostCreationService {
     private final ModelMapper modelMapper;
 
     @Override
-    public ApiResponse createBlogPost(BlogCreationRequest blogCreationRequest) {
+    public ApiResponse createBlogPost(BlogCreationRequest blogCreationRequest) throws BlogException {
         if(isAlreadyCreated(blogCreationRequest.getPostTitle())) {
 
             BlogPostUpdateRequest blogPostUpdateRequest = modelMapper.map(blogCreationRequest, BlogPostUpdateRequest.class);
