@@ -5,6 +5,7 @@ import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.dtos.request.LoginRequest;
 import dansarkitechnology.sialicensebackend.exceptions.AccountException;
 import dansarkitechnology.sialicensebackend.services.authentication.LoginService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping("login")
-    public ResponseEntity<ApiResponse> login(@RequestBody LoginRequest loginRequest) throws AccountException {
+    public ResponseEntity<ApiResponse> login(@RequestBody @Valid LoginRequest loginRequest) throws AccountException {
         return new ResponseEntity<>(loginService.login(loginRequest), HttpStatus.OK);
     }
 }

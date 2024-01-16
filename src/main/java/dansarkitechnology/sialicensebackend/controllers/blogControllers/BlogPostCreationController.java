@@ -4,6 +4,7 @@ import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.dtos.request.BlogCreationRequest;
 import dansarkitechnology.sialicensebackend.exceptions.BlogException;
 import dansarkitechnology.sialicensebackend.services.blog.blogPostCreation.BlogPostCreationService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class BlogPostCreationController {
     private final BlogPostCreationService blogPostCreationService;
 
     @PostMapping("blogPostCreation")
-    public ResponseEntity<ApiResponse> createBlogPost(@RequestBody BlogCreationRequest blogCreationRequest) throws BlogException {
+    public ResponseEntity<ApiResponse> createBlogPost(@RequestBody @Valid BlogCreationRequest blogCreationRequest) throws BlogException {
         return new ResponseEntity<>(blogPostCreationService.createBlogPost(blogCreationRequest), HttpStatus.OK);
     }
 }
