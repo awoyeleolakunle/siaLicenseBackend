@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 public class ApplicantRegisterController {
     private final ApplicantRegistrationService applicantRegistration;
-
     @SneakyThrows
     @PostMapping("register")
     public ResponseEntity<ApiResponse> registerApplicant(@RequestBody @Valid ApplicantRequest applicantRequest){

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,4 +28,6 @@ public class Applicant {
     private String city;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<TrainingSession> setOfBookedTrainingSessions;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Exam> listOfExamsTaken;
 }
