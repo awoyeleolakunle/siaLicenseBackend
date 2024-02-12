@@ -2,9 +2,11 @@ package dansarkitechnology.sialicensebackend.services.exam;
 
 import dansarkitechnology.sialicensebackend.data.models.Exam;
 
+import java.util.Optional;
+
 public interface ExamService {
     Exam save(Exam exam);
 
-   Exam findExamById(Long id);
+   Optional<Exam> findExamById(Long id);
 
 }

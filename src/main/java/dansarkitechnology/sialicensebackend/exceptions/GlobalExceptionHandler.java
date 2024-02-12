@@ -81,4 +81,23 @@ public class GlobalExceptionHandler {
                 .isSuccessful(false)
                 .build(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(QuestionException.class)
+    public ResponseEntity<ApiResponse> QuestionException(QuestionException questionException){
+        return new ResponseEntity<>(ApiResponse.builder()
+                .data(questionException.getMessage())
+                .httpStatus(HttpStatus.BAD_REQUEST)
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .isSuccessful(false)
+                .build(), HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(ExamException.class)
+    public ResponseEntity<ApiResponse> examException(ExamException examException){
+        return new ResponseEntity<>(ApiResponse.builder()
+                .data(examException.getMessage())
+                .httpStatus(HttpStatus.BAD_REQUEST)
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .isSuccessful(false)
+                .build(), HttpStatus.BAD_REQUEST);
+    }
 }

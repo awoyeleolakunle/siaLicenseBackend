@@ -1,10 +1,8 @@
 package dansarkitechnology.sialicensebackend.data.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import dansarkitechnology.sialicensebackend.data.enums.ExamType;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -22,4 +20,6 @@ public class Question {
     private String question;
     private List<String> listOfOptions;
     private String correctOption;
+    @Enumerated(EnumType.STRING)
+    private ExamType examType;
 }

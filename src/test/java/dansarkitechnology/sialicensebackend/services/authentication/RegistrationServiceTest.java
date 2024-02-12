@@ -39,7 +39,6 @@ class RegistrationServiceTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(centerRequest)))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
-
     }
 
 }
