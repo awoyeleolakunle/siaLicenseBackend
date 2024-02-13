@@ -1,9 +1,8 @@
 package dansarkitechnology.sialicensebackend.data.models;
 
-
-
-import dansarkitechnology.sialicensebackend.Utils.MapAttributeConverter;
+import dansarkitechnology.sialicensebackend.Utils.MapConverter;
 import jakarta.persistence.*;
+;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -23,8 +22,8 @@ public class Exam {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Question> shuffledQuestions;
 
-    @Convert(converter = MapAttributeConverter.class)
-    @ElementCollection
+   @Convert(converter = MapConverter.class)
+   @ElementCollection
     private Map<Integer, String> userAnswers;
     private String applicantEmailAddress;
     private String applicantLastName;

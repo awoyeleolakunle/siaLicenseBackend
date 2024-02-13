@@ -1,8 +1,8 @@
-package dansarkitechnology.sialicensebackend.services.authentication;
+package dansarkitechnology.sialicensebackend.services.exam.answersToQuestionManagement;
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dansarkitechnology.sialicensebackend.dtos.request.CenterRequest;
-import lombok.SneakyThrows;
+import dansarkitechnology.sialicensebackend.dtos.request.ExamCreationRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -17,27 +17,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-
-class RegistrationServiceTest {
+class ExamCreationServiceImpTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private ObjectMapper objectMapper;
 
-    @SneakyThrows
+
     @Test
-    public void testThatCenterCanRegister(){
-
-        CenterRequest centerRequest = new CenterRequest();
-        centerRequest.setCenterName("Mcpherson License");
-        centerRequest.setEmailAddress("McphersonLicense@gmail.com");
-        centerRequest.setPassword("password");
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/sialicence+/center/register")
+    public void testThatExamCanBeCreated() throws Exception {
+        ExamCreationRequest examCreationRequest = new ExamCreationRequest();
+        examCreationRequest.setExamType("COMMON_UNIT");
+        examCreationRequest.setApplicantEmailAddress("emailAddress@gmail.com");
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/sialicence+/exam/examCreation")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(centerRequest)))
+                .content(objectMapper.writeValueAsString(examCreationRequest)))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
     }
 }

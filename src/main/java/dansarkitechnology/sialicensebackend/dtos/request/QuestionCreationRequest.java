@@ -25,6 +25,6 @@ public class QuestionCreationRequest {
     private List<String> listOfOptions;
     @NotEmpty
     @NotBlank
-    private String correctOptions;
+    private String correctOption;
 
 }

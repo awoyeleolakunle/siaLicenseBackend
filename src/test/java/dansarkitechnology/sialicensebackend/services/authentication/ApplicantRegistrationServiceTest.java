@@ -28,10 +28,10 @@ class ApplicantRegistrationServiceTest {
     public void testTHatApplicantCanRegister(){
 
         ApplicantRequest applicantRequest  = new ApplicantRequest();
-        applicantRequest.setAddress("emailAddress@gmail.com");
+        applicantRequest.setEmailAddress("emailAddress@gmail.com");
         applicantRequest.setPassword("password");
         applicantRequest.setCity("London");
-        applicantRequest.setAddress("31 stamford distreet, London, United Kingdom");
+        applicantRequest.setAddress("31 stamford district, London, United Kingdom");
         applicantRequest.setPostCode("101101");
         applicantRequest.setFirstName("First Applicant");
         applicantRequest.setLastName("Last Applicant");

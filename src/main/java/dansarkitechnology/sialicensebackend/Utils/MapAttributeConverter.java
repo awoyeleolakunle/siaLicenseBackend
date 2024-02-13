@@ -1,19 +1,23 @@
 package dansarkitechnology.sialicensebackend.Utils;
 
 import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
 import java.util.HashMap;
 import java.util.Map;
 
+
+@Converter(autoApply = true)
 public class MapAttributeConverter  implements AttributeConverter<Map<Integer, String>, String> {
 
     @Override
     public String convertToDatabaseColumn(Map<Integer, String> attribute) {
+        System.out.println("I'm the attribute : " + attribute);
         if (attribute == null || attribute.isEmpty()) {
             return null;
         }
-        // For simplicity, let's assume JSON serialization
-        // You can use libraries like Jackson or Gson for more robust serialization
+
+
         return "{" +
                 attribute.entrySet().stream()
                         .map(entry -> "\"" + entry.getKey() + "\":\"" + entry.getValue() + "\"")
@@ -27,17 +31,17 @@ public class MapAttributeConverter  implements AttributeConverter<Map<Integer, S
         if (dbData == null || dbData.isEmpty()) {
             return new HashMap<>();
         }
-        // For simplicity, let's assume JSON deserialization
-        // You can use libraries like Jackson or Gson for more robust deserialization
+
         Map<Integer, String> map = new HashMap<>();
-        dbData = dbData.substring(1, dbData.length() - 1); // Remove curly braces
+        dbData = dbData.substring(1, dbData.length() - 1);
         String[] entries = dbData.split(",");
         for (String entry : entries) {
             String[] keyValue = entry.split(":");
-            int key = Integer.parseInt(keyValue[0].replace("\"", ""));
-            String value = keyValue[1].replace("\"", "");
+            int key = Integer.parseInt(keyValue[0].trim().replace("\"", ""));
+            String value = keyValue[1].trim().replace("\"", "");
             map.put(key, value);
         }
+        System.out.println("I'm the map : "+ map );
         return map;
     }
     }

@@ -33,7 +33,7 @@ class QuestionCreationServiceTest {
         QuestionCreationRequest questionCreationRequest = new QuestionCreationRequest();
         questionCreationRequest.setQuestion("What is the first of crucification");
         questionCreationRequest.setExamType("COMMON_UNIT");
-        questionCreationRequest.setCorrectOptions("January");
+        questionCreationRequest.setCorrectOption("April");
         List<String> listOfOptions = new ArrayList<>();
         listOfOptions.add("February");
         listOfOptions.add("March");
