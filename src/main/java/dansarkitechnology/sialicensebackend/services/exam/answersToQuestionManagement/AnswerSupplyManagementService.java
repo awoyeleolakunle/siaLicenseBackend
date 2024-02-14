@@ -5,5 +5,4 @@ import dansarkitechnology.sialicensebackend.dtos.request.AnswerSuppliedToQuestio
 
 public interface AnswerSupplyManagementService {
     ApiResponse supplyAnswerToQuestion(AnswerSuppliedToQuestionRequest answerSuppliedToQuestionRequest);
-
 }

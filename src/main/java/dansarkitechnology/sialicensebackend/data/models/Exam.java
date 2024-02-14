@@ -1,11 +1,17 @@
 package dansarkitechnology.sialicensebackend.data.models;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dansarkitechnology.sialicensebackend.Utils.MapConverter;
+import dansarkitechnology.sialicensebackend.Utils.UserAnswerDetails;
 import jakarta.persistence.*;
 ;
 import lombok.*;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,14 +26,31 @@ public class Exam {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Question> shuffledQuestions;
-
-   @Convert(converter = MapConverter.class)
-   @ElementCollection
-    private Map<Integer, String> userAnswers;
+    private List<Question> shuffledQuestions;private String userAnswers;
     private String applicantEmailAddress;
     private String applicantLastName;
     private String applicantFirstName;
     private LocalDateTime timeTaken;
     private int totalScore;
+
+    public Map<Integer, UserAnswerDetails> getUserAnswers() {
+        if (userAnswers == null || userAnswers.isEmpty()) {
+            return new HashMap<>();
+        }
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(userAnswers, new TypeReference<Map<Integer, UserAnswerDetails>>() {});
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new HashMap<>();
+        }
+    }
+    public void setUserAnswers(Map<Integer, UserAnswerDetails> userAnswers) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            this.userAnswers = objectMapper.writeValueAsString(userAnswers);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
 }

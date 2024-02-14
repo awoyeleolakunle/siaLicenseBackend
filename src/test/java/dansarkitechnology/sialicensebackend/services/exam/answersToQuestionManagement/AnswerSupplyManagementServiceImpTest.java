@@ -27,9 +27,7 @@ class AnswerSupplyManagementServiceImpTest {
         AnswerSuppliedToQuestionRequest answerSuppliedToQuestionRequest = new AnswerSuppliedToQuestionRequest();
         answerSuppliedToQuestionRequest.setExamId(1L);
         answerSuppliedToQuestionRequest.setQuestionIndex(0);
-        answerSuppliedToQuestionRequest.setAnswerSupplied("April");
-
-
+        answerSuppliedToQuestionRequest.setAnswerSupplied("Aprill");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/sialicence+/exam/answerSupplyToQuestion")
                 .contentType(MediaType.APPLICATION_JSON)

@@ -28,6 +28,7 @@ public class GenerateApiResponse {
     public static final String QUESTION_ALREADY_EXIST ="Question with same content " ;
     public static final String NO_EXAMINATION_FOUND = "Examination record cannot be found";
     public static final String ANSWER_SUCCESSFULLY_RECORDED = "Answer successfully recorded";
+    public static final String VALUE_INPUT_CURRENTLY_CHOSEN  = "Option currently chosen" ;
 
 
     public static ApiResponse createdResponse(Object data){
