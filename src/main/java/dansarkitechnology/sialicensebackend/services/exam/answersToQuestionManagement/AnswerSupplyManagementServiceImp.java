@@ -22,10 +22,13 @@ public class AnswerSupplyManagementServiceImp implements AnswerSupplyManagementS
     @Transactional
     public ApiResponse supplyAnswerToQuestion(AnswerSuppliedToQuestionRequest answerSuppliedToQuestionRequest) {
 
+
      Optional<Exam> foundExam = examService.findExamById(answerSuppliedToQuestionRequest.getExamId());
       if(foundExam.isEmpty()) throw new ExamException(GenerateApiResponse.NO_EXAMINATION_FOUND);
 
       Map<Integer, UserAnswerDetails> mappedAnswers = foundExam.get().getUserAnswers();
+
+        System.out.println("I'm the list of shuffled question : " + foundExam.get().getListOfShuffledQuestion());
 
       disallowOperationIfCorrectOptionHasBeenChosenAndTheCorrectOptionIsChosenAgain(mappedAnswers, answerSuppliedToQuestionRequest);
       mapUserCorrectAnswerDetailsToMappedAnswers(answerSuppliedToQuestionRequest, mappedAnswers, foundExam.get());
@@ -35,7 +38,7 @@ public class AnswerSupplyManagementServiceImp implements AnswerSupplyManagementS
     }
 
     private void mapUserInCorrectAnswerDetailsToMappedAnswers(AnswerSuppliedToQuestionRequest answerSuppliedToQuestionRequest, Map<Integer, UserAnswerDetails> mappedAnswers, Exam exam) {
-        if (!exam.getShuffledQuestions().get(answerSuppliedToQuestionRequest.getQuestionIndex()).getCorrectOption()
+        if (!exam.getListOfShuffledQuestion().get(answerSuppliedToQuestionRequest.getQuestionIndex()).getCorrectOption()
                 .equalsIgnoreCase(answerSuppliedToQuestionRequest.getAnswerSupplied()) &&
                 mappedAnswers.get(answerSuppliedToQuestionRequest.getQuestionIndex())
                         .isCorrectOptionChosen()) {
@@ -48,7 +51,7 @@ public class AnswerSupplyManagementServiceImp implements AnswerSupplyManagementS
             examService.save(exam);
         } else {
 
-            if (!exam.getShuffledQuestions().get(answerSuppliedToQuestionRequest.getQuestionIndex()).getCorrectOption()
+            if (!exam.getListOfShuffledQuestion().get(answerSuppliedToQuestionRequest.getQuestionIndex()).getCorrectOption()
                     .equalsIgnoreCase(answerSuppliedToQuestionRequest.getAnswerSupplied())) {
                 UserAnswerDetails userAnswerDetails = new UserAnswerDetails();
                 userAnswerDetails.setUserAnswer(answerSuppliedToQuestionRequest.getAnswerSupplied());
@@ -66,7 +69,7 @@ public class AnswerSupplyManagementServiceImp implements AnswerSupplyManagementS
         if(mappedAnswers.containsKey(answerSuppliedToQuestionRequest.getQuestionIndex())){
             UserAnswerDetails foundUserAnswerDetails =mappedAnswers.get(answerSuppliedToQuestionRequest.getQuestionIndex());
 
-            if(exam.getShuffledQuestions().get(answerSuppliedToQuestionRequest.getQuestionIndex())
+            if(exam.getListOfShuffledQuestion().get(answerSuppliedToQuestionRequest.getQuestionIndex())
                     .getCorrectOption().equalsIgnoreCase(answerSuppliedToQuestionRequest.getAnswerSupplied())){
                 foundUserAnswerDetails.setUserAnswer(answerSuppliedToQuestionRequest.getAnswerSupplied());
                 foundUserAnswerDetails.setCorrectOptionChosen(true);

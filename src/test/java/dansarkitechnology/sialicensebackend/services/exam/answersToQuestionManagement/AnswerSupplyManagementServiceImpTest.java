@@ -25,7 +25,7 @@ class AnswerSupplyManagementServiceImpTest {
     public void testThatAnApplicantCanSupplyAnAnswerToAQuestion() throws Exception {
 
         AnswerSuppliedToQuestionRequest answerSuppliedToQuestionRequest = new AnswerSuppliedToQuestionRequest();
-        answerSuppliedToQuestionRequest.setExamId(1L);
+        answerSuppliedToQuestionRequest.setExamId(152L);
         answerSuppliedToQuestionRequest.setQuestionIndex(0);
         answerSuppliedToQuestionRequest.setAnswerSupplied("Aprill");
 

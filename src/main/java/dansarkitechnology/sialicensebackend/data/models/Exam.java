@@ -3,14 +3,15 @@ package dansarkitechnology.sialicensebackend.data.models;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dansarkitechnology.sialicensebackend.Utils.MapConverter;
 import dansarkitechnology.sialicensebackend.Utils.UserAnswerDetails;
 import jakarta.persistence.*;
 ;
 import lombok.*;
+import org.hibernate.annotations.ManyToAny;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,10 +24,12 @@ import java.util.Map;
 @ToString
 public class Exam {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy =GenerationType.SEQUENCE)
     private Long id;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Question> shuffledQuestions;private String userAnswers;
+
+   @OneToMany(fetch = FetchType.EAGER)
+   private List<Question> listOfShuffledQuestion;
+    private String userAnswers;
     private String applicantEmailAddress;
     private String applicantLastName;
     private String applicantFirstName;

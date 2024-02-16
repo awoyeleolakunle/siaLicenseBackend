@@ -24,7 +24,6 @@ class ExamCreationServiceImpTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-
     @Test
     public void testThatExamCanBeCreated() throws Exception {
         ExamCreationRequest examCreationRequest = new ExamCreationRequest();
