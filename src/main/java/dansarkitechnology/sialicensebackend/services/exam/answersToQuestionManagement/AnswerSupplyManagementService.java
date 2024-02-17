@@ -2,7 +2,8 @@ package dansarkitechnology.sialicensebackend.services.exam.answersToQuestionMana
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.dtos.request.AnswerSuppliedToQuestionRequest;
+import dansarkitechnology.sialicensebackend.exceptions.QuestionException;
 
 public interface AnswerSupplyManagementService {
-    ApiResponse supplyAnswerToQuestion(AnswerSuppliedToQuestionRequest answerSuppliedToQuestionRequest);
+    ApiResponse supplyAnswerToQuestion(AnswerSuppliedToQuestionRequest answerSuppliedToQuestionRequest) throws QuestionException;
 }

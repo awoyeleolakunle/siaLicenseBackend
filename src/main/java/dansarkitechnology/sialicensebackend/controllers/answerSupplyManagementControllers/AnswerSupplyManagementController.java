@@ -3,6 +3,7 @@ package dansarkitechnology.sialicensebackend.controllers.answerSupplyManagementC
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.dtos.request.AnswerSuppliedToQuestionRequest;
+import dansarkitechnology.sialicensebackend.exceptions.QuestionException;
 import dansarkitechnology.sialicensebackend.services.exam.answersToQuestionManagement.AnswerSupplyManagementService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class AnswerSupplyManagementController {
     private final AnswerSupplyManagementService answerSupplyManagementService;
 
     @PostMapping("answerSupplyToQuestion")
-    public ResponseEntity<ApiResponse> supplyAnswerToQuestion(@RequestBody @Valid AnswerSuppliedToQuestionRequest answerSuppliedToQuestionRequest){
+    public ResponseEntity<ApiResponse> supplyAnswerToQuestion(@RequestBody @Valid AnswerSuppliedToQuestionRequest answerSuppliedToQuestionRequest) throws QuestionException {
         return new ResponseEntity<>(answerSupplyManagementService.supplyAnswerToQuestion(answerSuppliedToQuestionRequest), HttpStatus.OK);
     }
 }

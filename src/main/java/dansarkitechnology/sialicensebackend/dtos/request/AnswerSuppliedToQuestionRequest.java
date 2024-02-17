@@ -14,7 +14,7 @@ public class AnswerSuppliedToQuestionRequest {
     @NonNull
     private Long examId;
    @NonNull
-    private int questionIndex;
+    private int questionId;
    @NotBlank
    @NotEmpty
     private String answerSupplied;

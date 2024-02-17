@@ -25,9 +25,9 @@ class AnswerSupplyManagementServiceImpTest {
     public void testThatAnApplicantCanSupplyAnAnswerToAQuestion() throws Exception {
 
         AnswerSuppliedToQuestionRequest answerSuppliedToQuestionRequest = new AnswerSuppliedToQuestionRequest();
-        answerSuppliedToQuestionRequest.setExamId(152L);
-        answerSuppliedToQuestionRequest.setQuestionIndex(0);
-        answerSuppliedToQuestionRequest.setAnswerSupplied("Aprill");
+        answerSuppliedToQuestionRequest.setExamId(1L);
+        answerSuppliedToQuestionRequest.setQuestionId(1);
+        answerSuppliedToQuestionRequest.setAnswerSupplied("Kano");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/sialicence+/exam/answerSupplyToQuestion")
                 .contentType(MediaType.APPLICATION_JSON)

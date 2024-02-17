@@ -6,6 +6,7 @@ import dansarkitechnology.sialicensebackend.data.models.Applicant;
 import dansarkitechnology.sialicensebackend.data.models.Exam;
 import dansarkitechnology.sialicensebackend.data.models.Question;
 import dansarkitechnology.sialicensebackend.dtos.request.ExamCreationRequest;
+import dansarkitechnology.sialicensebackend.dtos.response.ExamShuffledQuestionResponse;
 import dansarkitechnology.sialicensebackend.exceptions.ApplicantException;
 import dansarkitechnology.sialicensebackend.services.applicant.ApplicantService;
 import dansarkitechnology.sialicensebackend.services.exam.ExamCreationService;
@@ -28,29 +29,25 @@ public class ExamCreationServiceImp implements ExamCreationService {
     private final QuestionService questionService;
     private final ModelMapper modelMapper;
 
-
     @Override
     public ApiResponse createExam(ExamCreationRequest examCreationRequest) throws ApplicantException {
         verifyApplicant(examCreationRequest.getApplicantEmailAddress());
-        Exam savedExam = mappedExam(examCreationRequest);
-        System.out.println("I'm the print before sending to front " + savedExam.getListOfShuffledQuestion());
-
-        return GenerateApiResponse.createdResponse(savedExam);
+        ExamShuffledQuestionResponse examShuffledQuestionResponse = mappedExam(examCreationRequest);
+        return GenerateApiResponse.createdResponse(examShuffledQuestionResponse);
     }
     private void verifyApplicant(String applicantEmailAddress) throws ApplicantException {
         Applicant foundUser = applicantService.findApplicantByEmailAddress(applicantEmailAddress);
         if(foundUser==null) throw new ApplicantException(GenerateApiResponse.APPLICANT_NOT_FOUND);
     }
-    private Exam mappedExam (ExamCreationRequest examCreationRequest) {
+    private ExamShuffledQuestionResponse mappedExam (ExamCreationRequest examCreationRequest) {
         Exam exam = modelMapper.map(examCreationRequest, Exam.class);
         exam.setTimeTaken(LocalDateTime.now());
         List<Question> listOfAllQuestions = questionService.findAllQuestionByExamType(examCreationRequest.getExamType());
-
+        Exam savedExam = examService.save(exam);
         Collections.shuffle(listOfAllQuestions);
-        exam.setListOfShuffledQuestion(new ArrayList<>(listOfAllQuestions));
-
-        System.out.println("I'm the exam before adding : " + exam);
-        System.out.println("I'm the list of exam before adding : " +  exam.getListOfShuffledQuestion());
-        return examService.save(exam);
+        ExamShuffledQuestionResponse examShuffledQuestionResponse = new ExamShuffledQuestionResponse();
+        examShuffledQuestionResponse.setExamId(savedExam.getId());
+        examShuffledQuestionResponse.setListOfShuffledQuestion(listOfAllQuestions);
+        return examShuffledQuestionResponse;
     }
 }

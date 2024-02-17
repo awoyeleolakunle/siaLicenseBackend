@@ -26,9 +26,6 @@ public class Exam {
     @Id
     @GeneratedValue(strategy =GenerationType.SEQUENCE)
     private Long id;
-
-   @OneToMany(fetch = FetchType.EAGER)
-   private List<Question> listOfShuffledQuestion;
     private String userAnswers;
     private String applicantEmailAddress;
     private String applicantLastName;

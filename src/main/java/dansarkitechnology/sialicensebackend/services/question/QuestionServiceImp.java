@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -20,6 +21,11 @@ public class QuestionServiceImp implements QuestionService{
     @Override
     public Question findQuestionByQuestion(String question) {
         return questionRepository.findByQuestion(question);
+    }
+
+    @Override
+    public Optional<Question> findQuestionById(Long id) {
+        return questionRepository.findById(id);
     }
 
     @Override
