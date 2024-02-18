@@ -27,7 +27,7 @@ class ExamCreationServiceImpTest {
     @Test
     public void testThatExamCanBeCreated() throws Exception {
         ExamCreationRequest examCreationRequest = new ExamCreationRequest();
-        examCreationRequest.setExamType("COMMON_UNIT");
+        examCreationRequest.setExamType("DOOR_SUPERVISION_IN_THE_PRIVATE_SECURITY_INDUSTRY");
         examCreationRequest.setApplicantEmailAddress("emailAddress@gmail.com");
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/sialicence+/exam/examCreation")
                 .contentType(MediaType.APPLICATION_JSON)

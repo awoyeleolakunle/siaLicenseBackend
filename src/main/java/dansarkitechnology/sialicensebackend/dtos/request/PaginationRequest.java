@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PaginationRequest {
 
+    private Long examId;
     private int pageNumber;
     private int pageSize;
 }

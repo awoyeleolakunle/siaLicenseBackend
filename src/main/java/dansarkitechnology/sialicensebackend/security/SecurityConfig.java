@@ -30,7 +30,7 @@ public class SecurityConfig {
             "/api/v1/sialicence+/applicant/applicantDetails", "/api/v1/sialicence+/blog/blogPostCreation",
             "/api/v1/sialicence+/blog/allActiveBlogPosts", "/api/v1/sialicence+/blog/allBlogPosts",
             "/api/v1/sialicence+/question/questionCreation", "/api/v1/sialicence+/exam/answerSupplyToQuestion"
-            ,"/api/v1/sialicence+/exam/examCreation"
+            ,"/api/v1/sialicence+/exam/examCreation", "/api/v1/sialicence+/question/paginatedQuestion"
     };
 
     private final String[] centerEndpoints = {
