@@ -13,7 +13,6 @@ import dansarkitechnology.sialicensebackend.services.question.QuestionService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Map;
 import java.util.Optional;
 

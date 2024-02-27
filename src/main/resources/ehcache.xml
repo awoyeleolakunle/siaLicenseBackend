@@ -1,0 +1,9 @@
+<config xmlns="http://www.ehcache.org/v3">
+    <cache alias="Questions">
+        <key-type>java.lang.Long</key-type> <!-- Assuming examId is of type Long -->
+        <value-type>java.util.List</value-type> <!-- Assuming the cached value is a List of Question objects -->
+        <heap unit="entries">100</heap> <!-- Adjust the maximum number of entries in the cache -->
+        <!-- Additional cache configuration options -->
+    </cache>
+    <!-- Define other caches if needed -->
+</config>

@@ -114,11 +114,11 @@
 			<artifactId>spring-boot-starter-cache</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-			<version>3.0.4</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-data-redis</artifactId>-->
+<!--			<version>3.0.4</version>-->
+<!--		</dependency>-->
 		<!-- Reactor Netty -->
 <!--		<dependency>-->
 <!--			<groupId>io.projectreactor.netty</groupId>-->
@@ -131,6 +131,16 @@
 <!--			<artifactId>lettuce-core</artifactId>-->
 <!--			<version>6.2.6.RELEASE</version>-->
 <!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>org.ehcache</groupId>-->
+<!--			<artifactId>ehcache</artifactId>-->
+<!--			<classifier>jakarta</classifier>-->
+<!--			<version>3.10.8</version>-->
+<!--		</dependency>-->
+
+
+
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

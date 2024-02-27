@@ -4,6 +4,7 @@ import dansarkitechnology.sialicensebackend.data.enums.ExamType;
 import dansarkitechnology.sialicensebackend.data.models.Question;
 import dansarkitechnology.sialicensebackend.data.repositories.QuestionRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +30,10 @@ public class QuestionServiceImp implements QuestionService{
         return questionRepository.findById(id);
     }
 
-    @Cacheable(value = "Questions", key = "#examId")
+    @Cacheable(value = "Questions", key = "#id")
+//    @CachePut(value = "Questions", key = "#id")
     @Override
-    public List<Question> findAllQuestionByExamType(String examType, Long examId) {
+    public List<Question> findAllQuestionByExamType(String examType, Long id) {
         return questionRepository.findAllByExamType(ExamType.valueOf(examType));
     }
 }

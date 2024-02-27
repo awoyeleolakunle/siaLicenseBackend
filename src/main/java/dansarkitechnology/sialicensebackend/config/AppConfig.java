@@ -1,30 +1,16 @@
 package dansarkitechnology.sialicensebackend.config;
 
-import dansarkitechnology.sialicensebackend.data.models.Question;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import org.springframework.data.redis.cache.RedisCacheConfiguration;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-
-import java.time.Duration;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -73,21 +59,21 @@ public class AppConfig {
         return javaMailSender;
     }
 
-    @Bean
-    public RedisCacheConfiguration redisCacheConfiguration() {
-        return RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(60))
-                .disableCachingNullValues()
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(
-                        new GenericJackson2JsonRedisSerializer()));
-    }
+//    @Bean
+//    public RedisCacheConfiguration redisCacheConfiguration() {
+//        return RedisCacheConfiguration.defaultCacheConfig()
+//                .entryTtl(Duration.ofMinutes(60))
+//                .disableCachingNullValues()
+//                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(
+//                        new GenericJackson2JsonRedisSerializer()));
+//    }
 
-    @Bean
-    public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
-        return (builder) -> builder.
-                withCacheConfiguration("QuestionCache",
-                        RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(60)));
-    }
+//    @Bean
+//    public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
+//        return (builder) -> builder.
+//                withCacheConfiguration("QuestionCache",
+//                        RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(60)));
+//    }
 
 //     @Bean
 //    public JedisConnectionFactory jedisConnectionFactory(){
@@ -111,15 +97,13 @@ public class AppConfig {
 //        return template;
 //     }
 
-    @Bean
-    public RedisTemplate<Long, List<Question>> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<Long, List<Question>> template = new RedisTemplate<>();
-        template.setConnectionFactory(redisConnectionFactory);
-        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-        return template;
-    }
-
-
+//    @Bean
+//    public RedisTemplate<Long, List<Question>> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+//        RedisTemplate<Long, List<Question>> template = new RedisTemplate<>();
+//        template.setConnectionFactory(redisConnectionFactory);
+//        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+//        return template;
+//    }
 
     @Bean
     public CacheManager cacheManager() {
@@ -129,12 +113,20 @@ public class AppConfig {
             return cacheManager;
     }
 }
+
+//@Bean
+//public CacheManager cacheManager(){
+//
+//        return new EhcacheManager();
+//}
+
 //    public CacheManager cacheManager() {
 //        CaffeineCacheManager cacheManager = new CaffeineCacheManager();
 //        cacheManager.setCacheSpecification("maximumSize=100,expireAfterAccess=5m");
 //        cacheManager.setAsyncCacheMode(true);
 //        return cacheManager;
 //    }
+
 //}
 
 //}

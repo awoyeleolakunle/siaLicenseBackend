@@ -14,5 +14,5 @@ public interface QuestionService {
     Optional<Question> findQuestionById(Long id);
 
 
-    List<Question> findAllQuestionByExamType(String examType, Long examId);
+    List<Question> findAllQuestionByExamType(String examType, Long id);
 }
