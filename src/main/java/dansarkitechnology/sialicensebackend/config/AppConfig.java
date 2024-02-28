@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
@@ -107,26 +108,27 @@ public class AppConfig {
 
     @Bean
     public CacheManager cacheManager() {
-            SimpleCacheManager cacheManager = new SimpleCacheManager();
-            cacheManager.setCaches(List.of(
-                    new ConcurrentMapCache("Questions")));
-            return cacheManager;
+        SimpleCacheManager cacheManager = new SimpleCacheManager();
+        cacheManager.setCaches(List.of(
+                new ConcurrentMapCache("Questions")));
+        return cacheManager;
     }
-}
+
 
 //@Bean
 //public CacheManager cacheManager(){
 //
 //        return new EhcacheManager();
 //}
-
-//    public CacheManager cacheManager() {
+//    @Bean
+//    public CaffeineCacheManager cacheManager() {
 //        CaffeineCacheManager cacheManager = new CaffeineCacheManager();
-//        cacheManager.setCacheSpecification("maximumSize=100,expireAfterAccess=5m");
-//        cacheManager.setAsyncCacheMode(true);
+//        cacheManager.setCacheSpecification("maximumSize=1000,expireAfterAccess=20m");
 //        return cacheManager;
 //    }
-
 //}
 
 //}
+
+//}
+}

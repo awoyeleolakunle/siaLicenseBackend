@@ -24,7 +24,7 @@ class CashedPaginatedQuestionServiceImpTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/sialicence+/question/paginatedQuestion")
                 .contentType(MediaType.APPLICATION_JSON)
-                .param("examId", "552")
+                .param("examId", "852")
                 .param("pageNumber", "1")
                 .param("pageSize", "10"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
