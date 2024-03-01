@@ -106,13 +106,13 @@ public class AppConfig {
 //        return template;
 //    }
 
-    @Bean
-    public CacheManager cacheManager() {
-        SimpleCacheManager cacheManager = new SimpleCacheManager();
-        cacheManager.setCaches(List.of(
-                new ConcurrentMapCache("Questions")));
-        return cacheManager;
-    }
+//    @Bean
+//    public CacheManager cacheManager() {
+//        SimpleCacheManager cacheManager = new SimpleCacheManager();
+//        cacheManager.setCaches(List.of(
+//                new ConcurrentMapCache("Questions")));
+//        return cacheManager;
+//    }
 
 
 //@Bean

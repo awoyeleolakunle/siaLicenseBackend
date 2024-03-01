@@ -27,8 +27,19 @@ class ExamCreationServiceImpTest {
         examCreationRequest.setExamType("DOOR_SUPERVISION_IN_THE_PRIVATE_SECURITY_INDUSTRY");
         examCreationRequest.setApplicantEmailAddress("emailAddress@gmail.com");
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/sialicence+/exam/examCreation")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(examCreationRequest)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(examCreationRequest)))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
     }
+        @Test
+        public void testThatACachedPaginatedQuestionCanBeFetched() throws Exception {
+
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/sialicence+/question/paginatedQuestion")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .param("id", " 2402")
+                            .param("pageNumber", "1")
+                            .param("pageSize", "10"))
+                    .andExpect(MockMvcResultMatchers.status().isOk());
+        }
 }
+

@@ -6,11 +6,16 @@ import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.Utils.GenerateApiResponse;
 import dansarkitechnology.sialicensebackend.data.models.Question;
 import dansarkitechnology.sialicensebackend.data.repositories.ExamRepository;
+import dansarkitechnology.sialicensebackend.services.exam.ExamService;
+import dansarkitechnology.sialicensebackend.services.question.CacheManagerService;
+import dansarkitechnology.sialicensebackend.services.question.QuestionService;
 import jakarta.persistence.Cacheable;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
@@ -20,29 +25,28 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-@Cacheable
+@CacheConfig(cacheNames = "Questions")
 @EnableCaching
 @AllArgsConstructor
 public class CashedPaginatedQuestionServiceImp implements CashedPaginatedQuestionService {
    // private final RedisTemplate<Long, List<Question>> redisTemplate;
     private final CacheManager cacheManager;
+    private final QuestionService questionService;
+    private final CacheManagerService cacheManagerService;
     @Override
     public List<Question> getCashedQuestionsByExamId(Long id) throws JsonProcessingException {
-        Cache cache = cacheManager.getCache("Questions");
-        System.out.println(cacheManager.getCacheNames().size());
-        System.out.println(cache.toString());
 
-            Cache.ValueWrapper valueWrapper = cache.get(id);
-            if (valueWrapper == null) {
-                System.out.println("I'm the value wrapper returning null");
-                return Collections.emptyList();
+        return cacheManagerService.getCachedShuffledQuestions(id);
+
+//        if (cache != null) {
+//            Cache.ValueWrapper valueWrapper =  cache.get(id);
+//            if (valueWrapper != null) {
+//                Object value = valueWrapper.get();
+//                if (value instanceof List) {
+//                    return (List<Question>) value;
+//                }
+//            }
             }
-            Object value = valueWrapper.get();
-            if (value instanceof List) {
-                return (List<Question>) value;
-            }
-            return Collections.emptyList();
-    }
 //            System.out.println("I'm found oooo");
 //            System.out.println(cache.getNativeCache().toString());
 //            System.out.println("I'm the list from the cache " + cache.get(id, List.class));

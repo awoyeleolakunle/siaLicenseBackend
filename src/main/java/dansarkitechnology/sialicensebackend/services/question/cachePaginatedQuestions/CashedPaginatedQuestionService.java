@@ -9,6 +9,6 @@ import java.util.List;
 public interface CashedPaginatedQuestionService {
     List<Question> getCashedQuestionsByExamId(Long examId) throws JsonProcessingException;
 
-    ApiResponse getCachedPaginatedQuestionsByExamId(Long examId, int pageNumber, int pageSize ) throws JsonProcessingException;
+    ApiResponse getCachedPaginatedQuestionsByExamId(Long id, int pageNumber, int pageSize ) throws JsonProcessingException;
 
 }

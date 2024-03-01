@@ -31,14 +31,14 @@ class QuestionCreationServiceTest {
     public void testThatQuestionCreationCanBeCreated() throws Exception {
 
         QuestionCreationRequest questionCreationRequest = new QuestionCreationRequest();
-        questionCreationRequest.setQuestion("What is the second smallest state in Nigeria in terms of land mass ");
+        questionCreationRequest.setQuestion("What is the last book of the bible ");
         questionCreationRequest.setExamType("DOOR_SUPERVISION_IN_THE_PRIVATE_SECURITY_INDUSTRY");
-        questionCreationRequest.setCorrectOption("Lagos");
+        questionCreationRequest.setCorrectOption("Revelation");
         List<String> listOfOptions = new ArrayList<>();
-        listOfOptions.add("Lagos");
-        listOfOptions.add("Abuja");
-        listOfOptions.add("Ogun");
-        listOfOptions.add("Kano");
+        listOfOptions.add("Mathew");
+        listOfOptions.add("Luke");
+        listOfOptions.add("Revelation");
+        listOfOptions.add("Genesis");
         questionCreationRequest.setListOfOptions(new ArrayList<>(listOfOptions));
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/sialicence+/question/questionCreation")

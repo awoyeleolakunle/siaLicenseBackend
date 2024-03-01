@@ -13,11 +13,13 @@ import dansarkitechnology.sialicensebackend.exceptions.ApplicantException;
 import dansarkitechnology.sialicensebackend.services.applicant.ApplicantService;
 import dansarkitechnology.sialicensebackend.services.exam.ExamCreationService;
 import dansarkitechnology.sialicensebackend.services.exam.ExamService;
+import dansarkitechnology.sialicensebackend.services.question.CacheManagerService;
 import dansarkitechnology.sialicensebackend.services.question.QuestionService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.stereotype.Service;
 
@@ -29,17 +31,14 @@ import java.util.Objects;
 
 @Service
 @AllArgsConstructor
+@CacheConfig(cacheNames = "Questions")
 public class ExamCreationServiceImp implements ExamCreationService {
     private final ExamService examService;
     private final ApplicantService applicantService;
     private final QuestionService questionService;
     private final ModelMapper modelMapper;
-
-    private final CacheManager cacheManager;
-
+    private final CacheManagerService cacheManagerService;
     // private final CaffeineCacheManager cacheManager;
-    private  final ObjectMapper objectMapper;
-
    // private final RedisTemplate<Long, List<Question>> redisTemplate;
 
 
@@ -60,22 +59,28 @@ public class ExamCreationServiceImp implements ExamCreationService {
         Exam savedExam = examService.save(exam);
         List<Question> listOfAllQuestions = getCachedQuestions(examCreationRequest.getExamType(), savedExam.getId());
 
-        Cache cache = cacheManager.getCache("Questions");
-        if (cache != null) {
+        Collections.shuffle(listOfAllQuestions);
+       // Cache cache = cacheManager.getCache("Questions");
+       // if (cache != null) {
            // cache.put(savedExam.getId(), listOfAllQuestions);
-            cache.putIfAbsent(savedExam.getId(), listOfAllQuestions);
+         //   cache.putIfAbsent(savedExam.getId(), listOfAllQuestions);
             System.out.println("I'm the list of cashed questions : "+ listOfAllQuestions);
             System.out.println("I'm I'm not null");
             System.out.println("i'm the saved exam id : "+ savedExam.getId());
-            System.out.println("I'm the saved confirmtaion " + cache.get(savedExam.getId(), List.class));
-        }
-        assert cache != null;
-        System.out.println("i'm the to string cached question: " + objectMapper.writeValueAsString(Objects.requireNonNull(cache.get(savedExam.getId(), List.class))).toString());
-        Collections.shuffle(listOfAllQuestions);
+
+            cacheManagerService.cacheListOfShuffledQuestions(savedExam.getId(), listOfAllQuestions);
+
+        System.out.println("i'm the gotten cashedList in creation but using the getCache method "+
+                cacheManagerService.getCachedShuffledQuestions(savedExam.getId()));
+          //  System.out.println("I'm the saved confirmtaion " + cache.get(savedExam.getId(), List.class));
+       // }
+       // assert cache != null;
+        //System.out.println("i'm the to string cached question: " + objectMapper.writeValueAsString(Objects.requireNonNull(cache.get(savedExam.getId(), List.class))).toString());
+       // Collections.shuffle(listOfAllQuestions);
         ExamShuffledQuestionResponse examShuffledQuestionResponse = new ExamShuffledQuestionResponse();
         examShuffledQuestionResponse.setExamId(savedExam.getId());
         examShuffledQuestionResponse.setListOfShuffledQuestion(listOfAllQuestions);
-        System.out.println("I'm the saved confirmtaion 2 : " + cache.get(savedExam.getId(), List.class));
+       // System.out.println("I'm the saved confirmtaion 2 : " + cache.get(savedExam.getId(), List.class));
         return examShuffledQuestionResponse;
 //        Exam exam = modelMapper.map(examCreationRequest, Exam.class);
 //        exam.setTimeTaken(LocalDateTime.now());
@@ -90,7 +95,8 @@ public class ExamCreationServiceImp implements ExamCreationService {
     }
 
     private List<Question> getCachedQuestions(String examType, Long id) {
-        return questionService.findAllQuestionByExamType(examType, id);
+
+        return questionService.findAllQuestionByExamType(examType);
 
 //        List<Question> cachedQuestions = redisTemplate.opsForValue().get(examId);
 //        if (cachedQuestions == null) {

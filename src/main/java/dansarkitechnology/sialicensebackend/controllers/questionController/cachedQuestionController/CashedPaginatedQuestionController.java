@@ -20,7 +20,7 @@ public class CashedPaginatedQuestionController {
 
     private final CashedPaginatedQuestionService cashedPaginatedQuestionService;
     @GetMapping("paginatedQuestion")
-    public ResponseEntity<ApiResponse> getCashedPaginatedQuestionByExamId( @Valid @RequestParam  Long examId,  @RequestParam @Valid int pageNumber, @RequestParam @Valid int pageSize) throws JsonProcessingException {
-       return new ResponseEntity<>(cashedPaginatedQuestionService.getCachedPaginatedQuestionsByExamId(examId, pageNumber, pageSize), HttpStatus.OK);
+    public ResponseEntity<ApiResponse> getCashedPaginatedQuestionByExamId( @Valid @RequestParam  Long id,  @RequestParam @Valid int pageNumber, @RequestParam @Valid int pageSize) throws JsonProcessingException {
+       return new ResponseEntity<>(cashedPaginatedQuestionService.getCachedPaginatedQuestionsByExamId(id, pageNumber, pageSize), HttpStatus.OK);
     }
 }
