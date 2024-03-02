@@ -9,7 +9,7 @@ import dansarkitechnology.sialicensebackend.data.models.User;
 import dansarkitechnology.sialicensebackend.dtos.request.ApplicantRequest;
 import dansarkitechnology.sialicensebackend.exceptions.ApplicantException;
 import dansarkitechnology.sialicensebackend.security.JwtService;
-import dansarkitechnology.sialicensebackend.services.UserService;
+import dansarkitechnology.sialicensebackend.services.userService.UserService;
 import dansarkitechnology.sialicensebackend.services.applicant.ApplicantService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;

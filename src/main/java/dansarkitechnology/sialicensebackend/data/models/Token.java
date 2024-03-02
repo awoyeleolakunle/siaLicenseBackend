@@ -1,4 +1,4 @@
-package dansarkitechnology.sialicensebackend.data;
+package dansarkitechnology.sialicensebackend.data.models;
 
 
 import jakarta.persistence.Entity;

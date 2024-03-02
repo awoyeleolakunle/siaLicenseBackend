@@ -14,15 +14,10 @@ import java.util.List;
 @CrossOrigin(origins = "*")
  @AllArgsConstructor
 public class AllActivePostController {
-
     private final BlogPostService blogPostService;
 
     @GetMapping("allActiveBlogPosts")
     public ResponseEntity<List<BlogPost>> fetchAllActiveBlogPost(@RequestParam int pageSize, @RequestParam int pageNumber){
-
-        System.out.println(pageNumber);
-        System.out.println(pageSize);
         return new ResponseEntity<>(blogPostService.findAllActiveBlogPost(pageSize, pageNumber), HttpStatus.OK);
-
     }
 }

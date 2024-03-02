@@ -4,7 +4,7 @@ package dansarkitechnology.sialicensebackend.controllers.questionController;
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.dtos.request.QuestionCreationRequest;
 import dansarkitechnology.sialicensebackend.exceptions.QuestionException;
-import dansarkitechnology.sialicensebackend.services.question.QuestionCreationService;
+import dansarkitechnology.sialicensebackend.services.question.questionCreation.QuestionCreationService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,10 +1,10 @@
-package dansarkitechnology.sialicensebackend.services.question;
+package dansarkitechnology.sialicensebackend.services.question.cacheManagement;
 
 import dansarkitechnology.sialicensebackend.data.models.Question;
 
 import java.util.List;
 
-public interface CacheManagerService {
+public interface CacheManagementService {
 
 
     List<Question> cacheListOfShuffledQuestions(Long id, List<Question> listOfShuffledQuestion);

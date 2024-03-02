@@ -1,4 +1,4 @@
-package dansarkitechnology.sialicensebackend.services.question;
+package dansarkitechnology.sialicensebackend.services.question.questionService;
 
 import dansarkitechnology.sialicensebackend.data.models.Question;
 import jakarta.persistence.Cacheable;
@@ -13,8 +13,6 @@ public interface QuestionService {
 
     Optional<Question> findQuestionById(Long id);
 
-
     List<Question> findAllQuestionByExamType(String examType);
 
-    List<Question> retrieveCachedQuestionsByExamType(Long id);
 }

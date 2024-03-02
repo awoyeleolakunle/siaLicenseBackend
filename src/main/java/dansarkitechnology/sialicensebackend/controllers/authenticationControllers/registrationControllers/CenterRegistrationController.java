@@ -7,7 +7,6 @@ import dansarkitechnology.sialicensebackend.exceptions.CenterException;
 import dansarkitechnology.sialicensebackend.services.authentication.CenterRegistrationService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 
 public class CenterRegistrationController {
-
     private final CenterRegistrationService registrationService;
-
     @PostMapping("register")
 public ResponseEntity<ApiResponse> registerCenter(@RequestBody @Valid CenterRequest centerRequest) throws CenterException {
         return new ResponseEntity<>(registrationService.registerCenter(centerRequest), HttpStatus.CREATED);

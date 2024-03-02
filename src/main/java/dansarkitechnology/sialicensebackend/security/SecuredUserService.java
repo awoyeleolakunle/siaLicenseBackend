@@ -2,7 +2,7 @@ package dansarkitechnology.sialicensebackend.security;
 
 
 import dansarkitechnology.sialicensebackend.data.models.User;
-import dansarkitechnology.sialicensebackend.services.UserService;
+import dansarkitechnology.sialicensebackend.services.userService.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

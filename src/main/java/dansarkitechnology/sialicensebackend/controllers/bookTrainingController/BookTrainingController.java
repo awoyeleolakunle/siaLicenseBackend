@@ -1,4 +1,4 @@
-package dansarkitechnology.sialicensebackend.controllers;
+package dansarkitechnology.sialicensebackend.controllers.bookTrainingController;
 
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;

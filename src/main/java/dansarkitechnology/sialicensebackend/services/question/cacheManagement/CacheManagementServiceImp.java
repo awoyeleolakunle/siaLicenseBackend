@@ -1,7 +1,6 @@
-package dansarkitechnology.sialicensebackend.services.question.cachePaginatedQuestions;
+package dansarkitechnology.sialicensebackend.services.question.cacheManagement;
 
 import dansarkitechnology.sialicensebackend.data.models.Question;
-import dansarkitechnology.sialicensebackend.services.question.CacheManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CacheMangerServiceImp implements CacheManagerService {
+public class CacheManagementServiceImp implements CacheManagementService {
     private final CacheManager cacheManager;
 
     @Override

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.dtos.request.ExamCreationRequest;
 import dansarkitechnology.sialicensebackend.exceptions.ApplicantException;
-import dansarkitechnology.sialicensebackend.services.exam.ExamCreationService;
+import dansarkitechnology.sialicensebackend.services.exam.examCreation.ExamCreationService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

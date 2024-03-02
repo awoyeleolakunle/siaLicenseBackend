@@ -9,7 +9,7 @@ import dansarkitechnology.sialicensebackend.data.models.User;
 import dansarkitechnology.sialicensebackend.dtos.request.CenterRequest;
 import dansarkitechnology.sialicensebackend.exceptions.CenterException;
 import dansarkitechnology.sialicensebackend.security.JwtService;
-import dansarkitechnology.sialicensebackend.services.UserService;
+import dansarkitechnology.sialicensebackend.services.userService.UserService;
 import dansarkitechnology.sialicensebackend.services.center.CenterService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -2,11 +2,9 @@ package dansarkitechnology.sialicensebackend.services.authentication;
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.Utils.GenerateApiResponse;
-import dansarkitechnology.sialicensebackend.data.models.User;
 import dansarkitechnology.sialicensebackend.dtos.request.LoginRequest;
 import dansarkitechnology.sialicensebackend.exceptions.AccountException;
 import dansarkitechnology.sialicensebackend.security.JwtService;
-import dansarkitechnology.sialicensebackend.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

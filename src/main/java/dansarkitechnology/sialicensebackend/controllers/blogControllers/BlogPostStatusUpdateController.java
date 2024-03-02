@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class BlogPostStatusUpdateController {
     private final BlogPostStatusUpdateService blogPostStatusUpdateService;
-
     @PatchMapping("blogPostStatusUpdate")
     public ResponseEntity<ApiResponse> updateBlogPostBlogStatus(@RequestBody @Valid BlogPostStatusUpdateRequest blogPostStatusUpdateRequest) throws BlogException {
         return new ResponseEntity<>(blogPostStatusUpdateService.updateBlogPostBlogStatus(blogPostStatusUpdateRequest), HttpStatus.OK);

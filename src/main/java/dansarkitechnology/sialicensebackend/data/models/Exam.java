@@ -3,17 +3,14 @@ package dansarkitechnology.sialicensebackend.data.models;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dansarkitechnology.sialicensebackend.Utils.UserAnswerDetails;
+import dansarkitechnology.sialicensebackend.services.exam.answersToQuestionManagement.UserAnswerDetails;
 import jakarta.persistence.*;
 ;
 import lombok.*;
-import org.hibernate.annotations.ManyToAny;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Entity

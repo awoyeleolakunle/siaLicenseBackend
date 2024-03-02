@@ -1,4 +1,4 @@
-package dansarkitechnology.sialicensebackend.services.question;
+package dansarkitechnology.sialicensebackend.services.question.questionCreation;
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.Utils.GenerateApiResponse;
@@ -6,13 +6,14 @@ import dansarkitechnology.sialicensebackend.data.enums.ExamType;
 import dansarkitechnology.sialicensebackend.data.models.Question;
 import dansarkitechnology.sialicensebackend.dtos.request.QuestionCreationRequest;
 import dansarkitechnology.sialicensebackend.exceptions.QuestionException;
+import dansarkitechnology.sialicensebackend.services.question.questionService.QuestionService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class QuestionCreationService {
+public class QuestionCreationServiceImp implements QuestionCreationService{
     private final QuestionService questionService;
     private final ModelMapper modelMapper;
     public ApiResponse createQuestion (QuestionCreationRequest questionCreationRequest) throws QuestionException {

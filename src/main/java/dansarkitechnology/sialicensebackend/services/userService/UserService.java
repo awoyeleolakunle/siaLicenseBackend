@@ -1,4 +1,4 @@
-package dansarkitechnology.sialicensebackend.services;
+package dansarkitechnology.sialicensebackend.services.userService;
 
 
 import dansarkitechnology.sialicensebackend.data.models.User;

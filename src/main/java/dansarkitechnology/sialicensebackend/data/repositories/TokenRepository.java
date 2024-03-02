@@ -1,6 +1,6 @@
 package dansarkitechnology.sialicensebackend.data.repositories;
 
-import dansarkitechnology.sialicensebackend.data.Token;
+import dansarkitechnology.sialicensebackend.data.models.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

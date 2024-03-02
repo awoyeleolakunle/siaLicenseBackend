@@ -2,22 +2,19 @@ package dansarkitechnology.sialicensebackend.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.caffeine.CaffeineCacheManager;
-import org.springframework.cache.concurrent.ConcurrentMapCache;
-import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-import java.util.List;
 import java.util.Properties;
 
 
 @Configuration
 @EnableCaching
+@EnableScheduling
 public class AppConfig {
 
     public static final String MAIL_SENDER_ACCOUNT = "awoyeleolakunle@gmail.com";
@@ -82,11 +79,6 @@ public class AppConfig {
 //     }
 
 //      @Bean
-//      public JedisPool jedisPool(){
-//          return new JedisPool("localhost", 6379);
-//      }
-//
-//      @Bean
 //      public RedisConnectionFactory redisConnectionFactory(){
 //        return new LettuceConnectionFactory(redisHost, redisPort);
 //      }
@@ -106,29 +98,8 @@ public class AppConfig {
 //        return template;
 //    }
 
-//    @Bean
-//    public CacheManager cacheManager() {
-//        SimpleCacheManager cacheManager = new SimpleCacheManager();
-//        cacheManager.setCaches(List.of(
-//                new ConcurrentMapCache("Questions")));
-//        return cacheManager;
-//    }
 
 
-//@Bean
-//public CacheManager cacheManager(){
-//
-//        return new EhcacheManager();
-//}
-//    @Bean
-//    public CaffeineCacheManager cacheManager() {
-//        CaffeineCacheManager cacheManager = new CaffeineCacheManager();
-//        cacheManager.setCacheSpecification("maximumSize=1000,expireAfterAccess=20m");
-//        return cacheManager;
-//    }
-//}
 
-//}
 
-//}
 }

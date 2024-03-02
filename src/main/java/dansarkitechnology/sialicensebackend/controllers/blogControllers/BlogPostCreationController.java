@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class BlogPostCreationController {
     private final BlogPostCreationService blogPostCreationService;
-
     @PostMapping("blogPostCreation")
     public ResponseEntity<ApiResponse> createBlogPost(@RequestBody @Valid BlogCreationRequest blogCreationRequest) throws BlogException {
         return new ResponseEntity<>(blogPostCreationService.createBlogPost(blogCreationRequest), HttpStatus.OK);

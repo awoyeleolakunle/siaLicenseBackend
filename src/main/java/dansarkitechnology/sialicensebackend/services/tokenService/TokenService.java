@@ -1,7 +1,7 @@
-package dansarkitechnology.sialicensebackend.services;
+package dansarkitechnology.sialicensebackend.services.tokenService;
 
 
-import dansarkitechnology.sialicensebackend.data.Token;
+import dansarkitechnology.sialicensebackend.data.models.Token;
 
 import java.util.Optional;
 

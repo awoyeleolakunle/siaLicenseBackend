@@ -19,8 +19,6 @@ public class AllBlogPostController {
 
     @PostMapping("allBlogPosts")
     public ResponseEntity<List<BlogPost>> fetchAllBlogPost(@RequestBody PaginationRequest paginationRequest){
-        System.out.println("I'm in");
-        System.out.println("I'm the pagination : " + paginationRequest.getPageNumber());
         return new ResponseEntity<>(blogPostService.findAllBlogPost(paginationRequest), HttpStatus.OK);
 }
 }

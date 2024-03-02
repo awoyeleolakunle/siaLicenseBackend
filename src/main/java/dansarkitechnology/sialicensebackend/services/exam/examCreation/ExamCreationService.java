@@ -1,4 +1,4 @@
-package dansarkitechnology.sialicensebackend.services.exam;
+package dansarkitechnology.sialicensebackend.services.exam.examCreation;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;

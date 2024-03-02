@@ -2,14 +2,13 @@ package dansarkitechnology.sialicensebackend.services.exam.answersToQuestionMana
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.Utils.GenerateApiResponse;
-import dansarkitechnology.sialicensebackend.Utils.UserAnswerDetails;
 import dansarkitechnology.sialicensebackend.data.models.Exam;
 import dansarkitechnology.sialicensebackend.data.models.Question;
 import dansarkitechnology.sialicensebackend.dtos.request.AnswerSuppliedToQuestionRequest;
 import dansarkitechnology.sialicensebackend.exceptions.ExamException;
 import dansarkitechnology.sialicensebackend.exceptions.QuestionException;
-import dansarkitechnology.sialicensebackend.services.exam.ExamService;
-import dansarkitechnology.sialicensebackend.services.question.QuestionService;
+import dansarkitechnology.sialicensebackend.services.exam.examService.ExamService;
+import dansarkitechnology.sialicensebackend.services.question.questionService.QuestionService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
