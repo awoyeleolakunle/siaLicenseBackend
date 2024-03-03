@@ -42,7 +42,6 @@ public class AuthConfig {
     }
 
 
-
         @Bean
         public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {

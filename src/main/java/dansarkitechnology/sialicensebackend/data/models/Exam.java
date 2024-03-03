@@ -24,7 +24,7 @@ public class Exam {
     @GeneratedValue(strategy =GenerationType.SEQUENCE)
     private Long id;
 
-    // This is a map that contains the userAnswerDetails as value and questionID as key.
+    // TODO: 3/3/2024   Note -> : The userAnswers  field is a map that contains the userAnswerDetails as value and questionID as key.
     private String userAnswers;
     private String applicantEmailAddress;
     private String applicantLastName;

@@ -1,10 +1,6 @@
 package dansarkitechnology.sialicensebackend.Utils;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
 public class GenerateApiResponse {
@@ -30,12 +26,13 @@ public class GenerateApiResponse {
     public static final String ANSWER_SUCCESSFULLY_RECORDED = "Answer successfully recorded";
     public static final String VALUE_INPUT_CURRENTLY_CHOSEN  = "Option currently chosen" ;
     public static final String NO_SUCH_QUESTION = "No such question";
+    public static final String NO_CACHE_FOUND = "No data found" ;
 
 
     public static ApiResponse createdResponse(Object data){
         return ApiResponse.builder()
                 .httpStatus(HttpStatus.CREATED)
-                .statusCode(HttpStatus.CREATED.value())
+                .status(HttpStatus.CREATED.value())
                 .isSuccessful(true)
                 .data(data)
                 .build();
@@ -44,7 +41,7 @@ public class GenerateApiResponse {
     public static ApiResponse alreadyExist(Object message) {
         return ApiResponse.builder()
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST.value())
                 .isSuccessful(false)
                 .data(message)
                 .build();
@@ -54,7 +51,7 @@ public class GenerateApiResponse {
         return ApiResponse.builder()
                 .data(data)
                 .httpStatus(HttpStatus.OK)
-                .statusCode(HttpStatus.OK.value())
+                .status(HttpStatus.OK.value())
                 .isSuccessful(true)
                 .build();
     }
@@ -63,7 +60,7 @@ public class GenerateApiResponse {
         return ApiResponse.builder()
                 .data(data)
                 .httpStatus(HttpStatus.OK)
-                .statusCode(HttpStatus.OK.value())
+                .status(HttpStatus.OK.value())
                 .isSuccessful(true)
                 .build();
     }
@@ -72,7 +69,7 @@ public class GenerateApiResponse {
         return ApiResponse.builder()
                 .data(data)
                 .httpStatus(HttpStatus.OK)
-                .statusCode(HttpStatus.OK.value())
+                .status(HttpStatus.OK.value())
                 .isSuccessful(true)
                 .build();
     }
@@ -81,7 +78,7 @@ public class GenerateApiResponse {
         return ApiResponse.builder()
                 .data(data)
                 .httpStatus(HttpStatus.OK)
-                .statusCode(HttpStatus.OK.value())
+                .status(HttpStatus.OK.value())
                 .isSuccessful(true)
                 .build();
     }
@@ -90,7 +87,7 @@ public class GenerateApiResponse {
         return ApiResponse.builder()
                 .data(data)
                 .httpStatus(HttpStatus.OK)
-                .statusCode(HttpStatus.OK.value())
+                .status(HttpStatus.OK.value())
                 .isSuccessful(true)
                 .build();
     }
@@ -99,7 +96,7 @@ public class GenerateApiResponse {
         return ApiResponse.builder()
                 .data(data)
                 .httpStatus(HttpStatus.OK)
-                .statusCode(HttpStatus.OK.value())
+                .status(HttpStatus.OK.value())
                 .isSuccessful(true)
                 .build();
     }

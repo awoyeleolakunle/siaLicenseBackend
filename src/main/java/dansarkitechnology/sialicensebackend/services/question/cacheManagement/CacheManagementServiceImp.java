@@ -28,7 +28,6 @@ public class CacheManagementServiceImp implements CacheManagementService {
         if (cache != null) {
             Cache.ValueWrapper valueWrapper = cache.get(id);
             if (valueWrapper != null) {
-                System.out.println("I'm the value rapper and I'm not null");
                 return (List<Question>) valueWrapper.get();
             }
         }

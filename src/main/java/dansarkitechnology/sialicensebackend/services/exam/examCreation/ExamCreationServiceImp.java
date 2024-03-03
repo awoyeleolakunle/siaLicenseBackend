@@ -27,35 +27,38 @@ public class ExamCreationServiceImp implements ExamCreationService {
     private final ApplicantService applicantService;
     private final QuestionService questionService;
     private final ModelMapper modelMapper;
-    private final CacheManagementService cacheManagerService;
+    private final CacheManagementService cacheManagementService;
 
     @Override
     public ApiResponse createExam(ExamCreationRequest examCreationRequest) throws ApplicantException, JsonProcessingException {
         verifyApplicant(examCreationRequest.getApplicantEmailAddress());
-        ExamShuffledQuestionResponse examShuffledQuestionResponse = mappedExam(examCreationRequest);
+        ExamShuffledQuestionResponse examShuffledQuestionResponse = createExamAndGetListOfShuffledQuestions(examCreationRequest);
         return GenerateApiResponse.createdResponse(examShuffledQuestionResponse);
     }
     private void verifyApplicant(String applicantEmailAddress) throws ApplicantException {
         Applicant foundUser = applicantService.findApplicantByEmailAddress(applicantEmailAddress);
         if(foundUser==null) throw new ApplicantException(GenerateApiResponse.APPLICANT_NOT_FOUND);
     }
-    private ExamShuffledQuestionResponse mappedExam (ExamCreationRequest examCreationRequest) throws JsonProcessingException {
+    private ExamShuffledQuestionResponse createExamAndGetListOfShuffledQuestions(ExamCreationRequest examCreationRequest) throws JsonProcessingException {
 
         Exam exam = modelMapper.map(examCreationRequest, Exam.class);
         exam.setTimeTaken(LocalDateTime.now());
         Exam savedExam = examService.save(exam);
-        List<Question> listOfAllQuestions = getCachedQuestions(examCreationRequest.getExamType());
+        List<Question> listOfAllQuestions = getListOfQuestionsByExamType(examCreationRequest.getExamType());
 
         Collections.shuffle(listOfAllQuestions);
-        cacheManagerService.cacheListOfShuffledQuestions(savedExam.getId(), listOfAllQuestions);
-
-        ExamShuffledQuestionResponse examShuffledQuestionResponse = new ExamShuffledQuestionResponse();
-        examShuffledQuestionResponse.setExamId(savedExam.getId());
-        examShuffledQuestionResponse.setListOfShuffledQuestion(listOfAllQuestions);
-        return examShuffledQuestionResponse;
+        cacheManagementService.cacheListOfShuffledQuestions(savedExam.getId(), listOfAllQuestions);
+        return getExamShuffledQuestions(savedExam, listOfAllQuestions);
     }
 
-    private List<Question> getCachedQuestions(String examType) {
+    private List<Question> getListOfQuestionsByExamType(String examType) {
         return questionService.findAllQuestionByExamType(examType);
+    }
+
+    private ExamShuffledQuestionResponse getExamShuffledQuestions(Exam exam , List<Question> listOfShuffledQuestions){
+        ExamShuffledQuestionResponse examShuffledQuestionResponse = new ExamShuffledQuestionResponse();
+        examShuffledQuestionResponse.setExamId(exam.getId());
+        examShuffledQuestionResponse.setListOfShuffledQuestion(listOfShuffledQuestions);
+        return examShuffledQuestionResponse;
     }
 }

@@ -12,6 +12,6 @@ import org.springframework.http.HttpStatus;
 public class ApiResponse {
     private Object data;
     private HttpStatus httpStatus;
-    private int statusCode;
+    private int status;
     private boolean isSuccessful;
 }

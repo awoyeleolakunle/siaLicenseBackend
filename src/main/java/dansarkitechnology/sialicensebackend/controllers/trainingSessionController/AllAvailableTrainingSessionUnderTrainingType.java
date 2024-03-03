@@ -18,7 +18,6 @@ public class AllAvailableTrainingSessionUnderTrainingType {
 
     private final TrainingSessionService trainingSessionService;
 
-
     @GetMapping ("allAvailableTrainingSessionUnderTrainingType")
     public ResponseEntity<List<TrainingSession>> fetchAllAvailableTrainingSessionUnderTrainingType(@RequestParam String trainingType){
         return new ResponseEntity<>(trainingSessionService.findAllAvailableTrainingSessionUnderAtTrainingType(trainingType), HttpStatus.OK);

@@ -3,17 +3,11 @@ package dansarkitechnology.sialicensebackend.exceptions;
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.Utils.GenerateApiResponse;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -23,7 +17,7 @@ public class GlobalExceptionHandler {
         ApiResponse apiResponse =  ApiResponse.builder()
                 .data(applicantRegistrationException.getMessage())
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST.value())
                 .isSuccessful(false)
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
@@ -34,7 +28,7 @@ public class GlobalExceptionHandler {
     return new ResponseEntity<>(ApiResponse.builder()
             .data(centerRegistrationException.getMessage())
             .httpStatus(HttpStatus.BAD_REQUEST)
-            .statusCode(HttpStatus.BAD_REQUEST.value())
+            .status(HttpStatus.BAD_REQUEST.value())
             .isSuccessful(false)
             .build(), HttpStatus.BAD_REQUEST);
     }
@@ -44,7 +38,7 @@ public class GlobalExceptionHandler {
     return new ResponseEntity<>(ApiResponse.builder()
             .data(accountException.getMessage())
             .httpStatus(HttpStatus.BAD_REQUEST)
-            .statusCode(HttpStatus.BAD_REQUEST.value())
+            .status(HttpStatus.BAD_REQUEST.value())
             .isSuccessful(false)
             .build(), HttpStatus.BAD_REQUEST);
     }
@@ -54,7 +48,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ApiResponse.builder()
                 .data(blogException.getMessage())
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST.value())
                 .isSuccessful(false)
                 .build(), HttpStatus.BAD_REQUEST);
 }
@@ -77,7 +71,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ApiResponse.builder()
                 .data(GenerateApiResponse.FILL_ALL_FIELDS)
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST.value())
                 .isSuccessful(false)
                 .build(), HttpStatus.BAD_REQUEST);
     }
@@ -87,7 +81,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ApiResponse.builder()
                 .data(questionException.getMessage())
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST.value())
                 .isSuccessful(false)
                 .build(), HttpStatus.BAD_REQUEST);
     }
@@ -96,7 +90,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ApiResponse.builder()
                 .data(examException.getMessage())
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .isSuccessful(false)
+                .build(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CacheNotFoundException.class)
+    public ResponseEntity<ApiResponse> cacheNotFoundException(CacheNotFoundException cacheNotFoundException){
+        return new ResponseEntity<>(ApiResponse.builder()
+                .data(cacheNotFoundException.getMessage())
+                .httpStatus(HttpStatus.BAD_REQUEST)
+                .status(HttpStatus.BAD_REQUEST.value())
                 .isSuccessful(false)
                 .build(), HttpStatus.BAD_REQUEST);
     }

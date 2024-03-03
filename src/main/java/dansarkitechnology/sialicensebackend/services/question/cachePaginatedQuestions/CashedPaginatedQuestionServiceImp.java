@@ -1,12 +1,12 @@
 package dansarkitechnology.sialicensebackend.services.question.cachePaginatedQuestions;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.Utils.GenerateApiResponse;
+import dansarkitechnology.sialicensebackend.Utils.NumericValues;
 import dansarkitechnology.sialicensebackend.data.models.Question;
+import dansarkitechnology.sialicensebackend.exceptions.CacheNotFoundException;
 import dansarkitechnology.sialicensebackend.services.question.cacheManagement.CacheManagementService;
 import lombok.AllArgsConstructor;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +24,10 @@ public class CashedPaginatedQuestionServiceImp implements CashedPaginatedQuestio
             }
 
     @Override
-    public ApiResponse getCachedPaginatedQuestionsByExamId(Long id, int pageNumber, int pageSize) throws JsonProcessingException {
+    public ApiResponse getCachedPaginatedQuestionsByExamId(Long id, int pageNumber, int pageSize) {
         List<Question> cachedQuestions = getCashedQuestionsByExamId(id);
-        int fromIndex = (pageNumber - 1) * pageSize;
+        if(cachedQuestions== null) throw new CacheNotFoundException(GenerateApiResponse.NO_CACHE_FOUND);
+        int fromIndex = (pageNumber - NumericValues.ONE) * pageSize;
         int toIndex = Math.min(fromIndex + pageSize, cachedQuestions.size());
         if (fromIndex <= toIndex) {
             return GenerateApiResponse.found(cachedQuestions.subList(fromIndex, toIndex));

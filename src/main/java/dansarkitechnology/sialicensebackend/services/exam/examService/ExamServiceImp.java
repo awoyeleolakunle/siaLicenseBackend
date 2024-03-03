@@ -1,6 +1,7 @@
 package dansarkitechnology.sialicensebackend.services.exam.examService;
 
 
+import dansarkitechnology.sialicensebackend.Utils.NumericValues;
 import dansarkitechnology.sialicensebackend.data.models.Exam;
 import dansarkitechnology.sialicensebackend.data.repositories.ExamRepository;
 import dansarkitechnology.sialicensebackend.services.exam.examService.ExamService;
@@ -26,10 +27,10 @@ public class ExamServiceImp implements ExamService {
     }
 
     @Override
-    @Scheduled(fixedRate = 90 * 60* 1000)
+    @Scheduled(fixedRate = NumericValues.NINETY * NumericValues.SIXTY* NumericValues.ONE_THOUSAND)
     @Transactional
     public void clearExpiredExams() {
-        LocalDateTime time = LocalDateTime.now().minusMinutes(90);
+        LocalDateTime time = LocalDateTime.now().minusMinutes(NumericValues.NINETY);
         examRepository.deleteAllByTimeTakenIsBefore(time);
     }
 }
