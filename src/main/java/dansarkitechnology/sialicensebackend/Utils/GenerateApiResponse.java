@@ -27,6 +27,7 @@ public class GenerateApiResponse {
     public static final String VALUE_INPUT_CURRENTLY_CHOSEN  = "Option currently chosen" ;
     public static final String NO_SUCH_QUESTION = "No such question";
     public static final String NO_CACHE_FOUND = "No data found" ;
+    public static final String TRAINING_ALREADY_BOOKED = "You have previously booked for this training";
 
 
     public static ApiResponse createdResponse(Object data){

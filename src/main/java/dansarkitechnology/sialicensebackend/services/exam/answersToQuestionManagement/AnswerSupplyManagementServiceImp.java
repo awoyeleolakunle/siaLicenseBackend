@@ -26,14 +26,16 @@ public class AnswerSupplyManagementServiceImp implements AnswerSupplyManagementS
     @Transactional
     public ApiResponse supplyAnswerToQuestion(AnswerSuppliedToQuestionRequest answerSuppliedToQuestionRequest) throws QuestionException {
 
+        System.out.println(answerSuppliedToQuestionRequest.getAnswerSupplied());
         Optional<Exam> foundExam = examService.findExamById(answerSuppliedToQuestionRequest.getExamId());
         if (foundExam.isEmpty()) throw new ExamException(GenerateApiResponse.NO_EXAMINATION_FOUND);
 
         Map<Integer, UserAnswerDetails> mappedAnswers = foundExam.get().getUserAnswers();
 
         disallowOperationIfCorrectOptionHasBeenChosenAndTheCorrectOptionIsChosenAgain(mappedAnswers, answerSuppliedToQuestionRequest);
-        mapUserCorrectAnswerDetailsToMappedAnswers(answerSuppliedToQuestionRequest, mappedAnswers, foundExam.get());
         mapUserInCorrectAnswerDetailsToMappedAnswers(answerSuppliedToQuestionRequest, mappedAnswers, foundExam.get());
+        mapUserCorrectAnswerDetailsToMappedAnswers(answerSuppliedToQuestionRequest, mappedAnswers, foundExam.get());
+
 
         return GenerateApiResponse.ok(GenerateApiResponse.ANSWER_SUCCESSFULLY_RECORDED);
     }
@@ -54,8 +56,12 @@ public class AnswerSupplyManagementServiceImp implements AnswerSupplyManagementS
             userAnswerDetails.setUserAnswer(answerSuppliedToQuestionRequest.getAnswerSupplied());
             userAnswerDetails.setCorrectOptionChosen(false);
             exam.setTotalScore(exam.getTotalScore() - NumericValues.ONE);
+            mappedAnswers.put(answerSuppliedToQuestionRequest.getQuestionId(), userAnswerDetails);
+            exam.setUserAnswers(mappedAnswers);
+            examService.save(exam);
         }
-
+        userAnswerDetails.setUserAnswer(answerSuppliedToQuestionRequest.getAnswerSupplied());
+        userAnswerDetails.setCorrectOptionChosen(false);
         mappedAnswers.put(answerSuppliedToQuestionRequest.getQuestionId(), userAnswerDetails);
         exam.setUserAnswers(mappedAnswers);
         examService.save(exam);
@@ -71,7 +77,8 @@ public class AnswerSupplyManagementServiceImp implements AnswerSupplyManagementS
         if (foundUserAnswerDetails == null) {
             foundUserAnswerDetails = new UserAnswerDetails();
         }
-        if (foundQuestion.get().getCorrectOption().equalsIgnoreCase(answerSuppliedToQuestionRequest.getAnswerSupplied())) {
+        if (foundQuestion.get().getCorrectOption().equalsIgnoreCase(answerSuppliedToQuestionRequest.getAnswerSupplied())
+        ) {
             foundUserAnswerDetails.setUserAnswer(answerSuppliedToQuestionRequest.getAnswerSupplied());
             foundUserAnswerDetails.setCorrectOptionChosen(true);
             mappedAnswers.put(answerSuppliedToQuestionRequest.getQuestionId(), foundUserAnswerDetails);
@@ -88,5 +95,6 @@ public class AnswerSupplyManagementServiceImp implements AnswerSupplyManagementS
           if(foundUserAnswerDetails.getUserAnswer().equalsIgnoreCase(answerSuppliedToQuestionRequest.getAnswerSupplied())&&
                   (foundUserAnswerDetails.isCorrectOptionChosen())) throw new ExamException(GenerateApiResponse.VALUE_INPUT_CURRENTLY_CHOSEN);
         }
+
 }
 }

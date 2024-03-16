@@ -34,24 +34,36 @@ public class BookTrainingServiceImp implements BookTrainingService{
     private final BookedTrainingSessionService bookedTrainingSessionService;
 
     @Override
-    @Transactional
+
     public ApiResponse bookTraining(BookTrainingSessionRequest bookTrainingSessionRequest) throws TrainingSessionException, CenterException, ApplicantException {
 
         Applicant applicant = applicantService.findApplicantByEmailAddress(bookTrainingSessionRequest.getApplicantEmailAddress());
         Applicant validatedApplicant =  validateApplicant(applicant);
         Center center = centerService.findCenterByEmailAddress(bookTrainingSessionRequest.getCenterEmailAddress());
         Center validatedCenter = validateCenter(center);
-
         Optional<TrainingSession> trainingSession = trainingSessionService.findTrainingSessionById(bookTrainingSessionRequest.getTrainingId());
        TrainingSession validatedTrainingSession =  validateTrainingSession(trainingSession);
 
+       verifyDuplicateEntryOfTrainingSession(applicant, validatedTrainingSession);
+
         addTrainingSessionToTheSetOfApplicantBookedTrainings(validatedApplicant, validatedTrainingSession);
 
+        System.out.println("I got here after adding training session to applicant");
         BookedTraining savedBookedTraining = createNewBookedTraining(validatedTrainingSession, validatedApplicant,  validatedCenter);
 
-        addTrainingSessionToTheSetOfCenterBookedTrainingSession( validatedCenter, savedBookedTraining);
+        System.out.println("I was saved cause I gpt here");
 
+
+        addTrainingSessionToTheSetOfCenterBookedTrainingSession( validatedCenter, savedBookedTraining);
+        System.out.println("I got here after adding the booked training to the center ");
         return GenerateApiResponse.createdResponse(GenerateApiResponse.TRAINING_SUCCESSFULLY_BOOKED);
+    }
+
+    private void verifyDuplicateEntryOfTrainingSession(Applicant applicant , TrainingSession validatedTrainingSession) throws TrainingSessionException {
+
+       if(applicant.getSetOfBookedTrainingSessions().contains(validatedTrainingSession)){
+           throw new TrainingSessionException(GenerateApiResponse.TRAINING_ALREADY_BOOKED);
+       };
     }
 
     private TrainingSession validateTrainingSession(Optional<TrainingSession> trainingSession) throws TrainingSessionException {

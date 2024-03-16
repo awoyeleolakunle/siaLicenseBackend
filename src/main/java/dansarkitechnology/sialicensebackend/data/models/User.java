@@ -26,4 +26,7 @@ public class User {
     @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
     private Set<Roles> roles;
     private LocalDateTime registrationDate;
+    private String firstName;
+    private String lastName;
+    private String middleName;
 }

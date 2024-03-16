@@ -18,32 +18,37 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
     private final String[] allowedEndPoints = {
-            "/api/v1/sialicence+/center/register" , "/api/v1/sialicence+/applicant/register",
-           "/api/v1/sialicence+/center/createTrainingSession", "/api/v1/sialicence+/applicant/bookTraining",
-            "/api/v1/sialicence+/center/aCenterAllTrainingSessions", "/api/v1/sialicence+/login",
+             "/api/v1/sialicence+/applicant/register",
+            "/api/v1/sialicence+/login",
+            "/api/v1/sialicence+/center/register",
             "/api/v1/sialicence+/trainingSession/allAvailableTrainingSessionUnderTrainingType",
-            "/api/v1/sialicence+/applicant/applicantDetails", "/api/v1/sialicence+/blog/blogPostCreation",
             "/api/v1/sialicence+/blog/allActiveBlogPosts", "/api/v1/sialicence+/blog/allBlogPosts",
-            "/api/v1/sialicence+/question/questionCreation", "/api/v1/sialicence+/exam/answerSupplyToQuestion"
-            ,"/api/v1/sialicence+/exam/examCreation", "/api/v1/sialicence+/question/paginatedQuestion"
     };
 
-    private final String[] centerEndpoints = {
-     //        "/api/v1/sialicence+/center/createTrainingSession"
+    private final String[] centerEndPoints = { "/api/v1/sialicence+/center/createTrainingSession",
+            "/api/v1/sialicence+/center/aCenterAllTrainingSessions",
     };
-
+    private final String[] applicantEndPoints = {
+            "/api/v1/sialicence+/applicant/bookTraining", "/api/v1/sialicence+/applicant/applicantDetails",
+            "/api/v1/sialicence+/exam/answerSupplyToQuestion","/api/v1/sialicence+/exam/examCreation",
+            "/api/v1/sialicence+/question/paginatedQuestion"
+    };
+private final String[] adminEndPoints = {
+        "/api/v1/sialicence+/question/questionCreation",  "/api/v1/sialicence+/blog/blogPostCreation",
+        "/api/v1/sialicence+/applicant/applicantDetails",
+};
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.
                 csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests((auth-> {auth.requestMatchers(allowedEndPoints).permitAll();}))
-//                        .requestMatchers(centerEndpoints).hasAuthority(Roles.CENTER.name());}))
+                .authorizeHttpRequests((auth-> {auth.requestMatchers(allowedEndPoints).permitAll()
+                        .requestMatchers(centerEndPoints).hasAuthority(Roles.CENTER.name())
+                        .requestMatchers(applicantEndPoints).hasAuthority(Roles.APPLICANT.name())
+                        .requestMatchers(adminEndPoints).hasAuthority(Roles.ADMIN.name()).anyRequest().authenticated();}))
                 .sessionManagement((session) -> {
                     session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
                 })
@@ -51,5 +56,4 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
 }

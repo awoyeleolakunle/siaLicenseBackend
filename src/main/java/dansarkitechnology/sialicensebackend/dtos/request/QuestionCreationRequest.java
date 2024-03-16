@@ -21,10 +21,9 @@ public class QuestionCreationRequest {
     @NotEmpty
     @NotBlank
     private String examType;
-    @NotEmpty
+
     private List<String> listOfOptions;
     @NotEmpty
     @NotBlank
     private String correctOption;
-
 }

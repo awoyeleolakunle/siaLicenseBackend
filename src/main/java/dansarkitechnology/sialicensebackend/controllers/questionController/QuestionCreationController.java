@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/sialicence+/question/")
+@RequestMapping("/api/v1/sialicence+/question/")
 @CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class QuestionCreationController {

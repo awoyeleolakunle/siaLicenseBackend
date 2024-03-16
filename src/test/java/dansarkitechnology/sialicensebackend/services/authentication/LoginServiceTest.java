@@ -24,7 +24,6 @@ class LoginServiceTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-
     @Test
     @SneakyThrows
     public void testThatUserCanLogin(){
@@ -39,4 +38,6 @@ class LoginServiceTest {
                 .content(objectMapper.writeValueAsString(loginRequest)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+
+
 }

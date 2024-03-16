@@ -24,6 +24,7 @@ public class ApplicantRequest {
     @NotBlank
     @NotEmpty(message = "Last Name should not be empty")
     private String lastName;
+    private String middleName;
     @NotBlank
     @NotEmpty(message = "Post Code should not be empty")
     private String postCode;

@@ -21,12 +21,10 @@ public class Applicant {
     private Long id;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private User user;
-    private String firstName;
-    private String lastName;
     private String postCode;
     private String address;
     private String city;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<TrainingSession> setOfBookedTrainingSessions;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Exam> listOfExamsTaken;

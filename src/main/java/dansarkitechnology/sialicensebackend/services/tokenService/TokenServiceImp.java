@@ -21,11 +21,11 @@ public class TokenServiceImp implements TokenService {
 
     @Override
     public Optional<Token> findTokenByUserEmailAddress(String emailAddress) {
-        return Optional.empty();
+        return tokenRepository.findTokenByUserEmailAddress(emailAddress);
     }
 
     @Override
     public Optional<Token> findTokenByJwt(String jwt) {
-        return Optional.empty();
+        return tokenRepository.findTokenByJwt(jwt);
     }
 }

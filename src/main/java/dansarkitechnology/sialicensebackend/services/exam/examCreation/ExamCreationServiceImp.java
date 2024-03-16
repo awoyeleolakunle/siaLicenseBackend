@@ -33,6 +33,7 @@ public class ExamCreationServiceImp implements ExamCreationService {
     public ApiResponse createExam(ExamCreationRequest examCreationRequest) throws ApplicantException, JsonProcessingException {
         verifyApplicant(examCreationRequest.getApplicantEmailAddress());
         ExamShuffledQuestionResponse examShuffledQuestionResponse = createExamAndGetListOfShuffledQuestions(examCreationRequest);
+        System.out.println(examShuffledQuestionResponse.toString());
         return GenerateApiResponse.createdResponse(examShuffledQuestionResponse);
     }
     private void verifyApplicant(String applicantEmailAddress) throws ApplicantException {

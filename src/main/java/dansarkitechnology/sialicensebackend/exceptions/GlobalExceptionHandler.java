@@ -33,6 +33,16 @@ public class GlobalExceptionHandler {
             .build(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(TrainingSessionException.class)
+    public ResponseEntity<ApiResponse> trainingSessionException(TrainingSessionException trainingSessionException){
+        return new ResponseEntity<>(ApiResponse.builder()
+                .data(trainingSessionException.getMessage())
+                .httpStatus(HttpStatus.BAD_REQUEST)
+                .status(HttpStatus.BAD_REQUEST.value())
+                .isSuccessful(false)
+                .build(), HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(AccountException.class)
     public ResponseEntity<ApiResponse> accountException(AccountException accountException){
     return new ResponseEntity<>(ApiResponse.builder()

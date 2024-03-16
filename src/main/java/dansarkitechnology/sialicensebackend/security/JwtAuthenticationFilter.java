@@ -40,9 +40,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
+        System.out.println("I'm before the substring ");
         jwt = authHeader.substring(7);
         username =  jwtService.extractUsername(jwt);
 
+        System.out.println("I'm the username " + username);
+
+        System.out.println("I got here first ");
         if(username!= null && SecurityContextHolder.getContext().getAuthentication()== null){
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
             boolean isValidToken =
@@ -52,6 +56,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 //                sessionexpired();
 //            }
 
+            System.out.println("i got here");
             if(jwtService.isTokenValid(jwt, userDetails) && isValidToken){
                 System.out.println("IS VALID");
 

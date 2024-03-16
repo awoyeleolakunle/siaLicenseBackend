@@ -59,6 +59,8 @@ public class ApplicantRegistrationService {
     private User buildNewUser(ApplicantRequest applicantRequest) {
         User user = new User();
         user.setEmailAddress(applicantRequest.getEmailAddress());
+        user.setFirstName(applicantRequest.getFirstName());
+        user.setLastName(applicantRequest.getLastName());
         user.setPassword(passwordEncoder.encode(applicantRequest.getPassword()));
         user.setRegistrationDate(LocalDateTime.now());
         Set<Roles> roles = new HashSet<>();
