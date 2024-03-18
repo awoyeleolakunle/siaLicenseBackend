@@ -20,7 +20,7 @@ public class ExamCreationController {
     private final ExamCreationService examCreationService;
     @PostMapping("examCreation")
     public ResponseEntity<ApiResponse> createExam(@RequestBody @Valid ExamCreationRequest examCreationRequest) throws ApplicantException, JsonProcessingException {
-        System.out.println("i got called");
+
         return new ResponseEntity<>(examCreationService.createExam(examCreationRequest), HttpStatus.CREATED);
     }
 }

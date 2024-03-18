@@ -48,14 +48,12 @@ public class BookTrainingServiceImp implements BookTrainingService{
 
         addTrainingSessionToTheSetOfApplicantBookedTrainings(validatedApplicant, validatedTrainingSession);
 
-        System.out.println("I got here after adding training session to applicant");
         BookedTraining savedBookedTraining = createNewBookedTraining(validatedTrainingSession, validatedApplicant,  validatedCenter);
 
-        System.out.println("I was saved cause I gpt here");
+
 
 
         addTrainingSessionToTheSetOfCenterBookedTrainingSession( validatedCenter, savedBookedTraining);
-        System.out.println("I got here after adding the booked training to the center ");
         return GenerateApiResponse.createdResponse(GenerateApiResponse.TRAINING_SUCCESSFULLY_BOOKED);
     }
 

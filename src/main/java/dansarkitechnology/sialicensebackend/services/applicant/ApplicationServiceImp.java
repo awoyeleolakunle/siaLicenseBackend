@@ -26,8 +26,7 @@ public class ApplicationServiceImp implements ApplicantService {
 
     @Override
     public ApiResponse findApplicantDetails(String applicantEmailAddress) {
-        var foundApplicantDetails = findApplicantByEmailAddress(applicantEmailAddress);
-        System.out.println("I'm the found applicant : "+ foundApplicantDetails);
+        Applicant foundApplicantDetails = findApplicantByEmailAddress(applicantEmailAddress);
         return GenerateApiResponse.found(foundApplicantDetails);
     }
 }

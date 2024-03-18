@@ -1,6 +1,8 @@
 package dansarkitechnology.sialicensebackend.security;
 
 
+import dansarkitechnology.sialicensebackend.Utils.GenerateApiResponse;
+import dansarkitechnology.sialicensebackend.exceptions.SessionTimeOutException;
 import dansarkitechnology.sialicensebackend.services.tokenService.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -31,34 +33,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
         final String authHeader = request.getHeader("Authorization");
-        System.out.println("Http Method "+ request.getMethod());
-        System.out.println("I'm the auth header  opss "+ authHeader);
         final String jwt;
         final String username;
 
-        if (authHeader==null || !authHeader.startsWith("Bearer ")){
+        if (authHeader==null || !authHeader.startsWith(GenerateApiResponse.BEARER)){
             filterChain.doFilter(request, response);
             return;
         }
-        System.out.println("I'm before the substring ");
+
         jwt = authHeader.substring(7);
         username =  jwtService.extractUsername(jwt);
 
-        System.out.println("I'm the username " + username);
 
-        System.out.println("I got here first ");
         if(username!= null && SecurityContextHolder.getContext().getAuthentication()== null){
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
             boolean isValidToken =
                     tokenService.findTokenByJwt(jwt).map(token -> !token.isExpired() && !token.isRevoked()).orElse(false);
 
-//            if(!isValidToken){
-//                sessionexpired();
-//            }
 
-            System.out.println("i got here");
             if(jwtService.isTokenValid(jwt, userDetails) && isValidToken){
-                System.out.println("IS VALID");
+
 
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails.getUsername(),
@@ -67,6 +61,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 );
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            }else {
+                throw new SessionTimeOutException(GenerateApiResponse.SESSION_TIME_OUT);
             }
         }
         filterChain.doFilter(request, response);

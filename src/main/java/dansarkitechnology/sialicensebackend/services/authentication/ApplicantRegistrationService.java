@@ -5,14 +5,20 @@ import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.Utils.GenerateApiResponse;
 import dansarkitechnology.sialicensebackend.data.enums.Roles;
 import dansarkitechnology.sialicensebackend.data.models.Applicant;
+import dansarkitechnology.sialicensebackend.data.models.Token;
 import dansarkitechnology.sialicensebackend.data.models.User;
 import dansarkitechnology.sialicensebackend.dtos.request.ApplicantRequest;
+import dansarkitechnology.sialicensebackend.exceptions.AccountException;
 import dansarkitechnology.sialicensebackend.exceptions.ApplicantException;
 import dansarkitechnology.sialicensebackend.security.JwtService;
+import dansarkitechnology.sialicensebackend.services.tokenService.TokenService;
 import dansarkitechnology.sialicensebackend.services.userService.UserService;
 import dansarkitechnology.sialicensebackend.services.applicant.ApplicantService;
+import jakarta.persistence.NonUniqueResultException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,21 +38,31 @@ public class ApplicantRegistrationService {
     private final UserService userService;
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+    private AuthenticationManager authenticationManager;
+    private final TokenService tokenService;
     private final ModelMapper modelMapper;
 
 
     @Transactional
-    public ApiResponse registerApplicant(ApplicantRequest applicantRequest) throws ApplicantException {
-
-        boolean isRegistered = userService.findUserByEmailAddress(applicantRequest.getEmailAddress())!=null;
-        if(isRegistered) throw new ApplicantException(GenerateApiResponse.APPLICANT_ALREADY_EXIST);
-
+    public ApiResponse registerApplicant(ApplicantRequest applicantRequest) throws ApplicantException, AccountException {
+        try {
+            boolean isRegistered = userService.findUserByEmailAddress(applicantRequest.getEmailAddress()) != null;
+            if (isRegistered) throw new ApplicantException(GenerateApiResponse.APPLICANT_ALREADY_EXIST);
+        }catch (RuntimeException e){
+            throw new ApplicantException(GenerateApiResponse.APPLICANT_ALREADY_EXIST);
+        }
         User newlyBuiltUser = buildNewUser(applicantRequest);
         Applicant newlyBuiltApplicant = buildNewApplicant(newlyBuiltUser, applicantRequest);
 
+        try{
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(applicantRequest.getEmailAddress(), applicantRequest.getPassword()));
+        }catch (RuntimeException e){
+            throw new AccountException(GenerateApiResponse.INVALID_DETAILS);
+        }
         UserDetails userDetails = userDetailsService.loadUserByUsername(newlyBuiltApplicant.getUser().getEmailAddress());
         String jwt = jwtService.generateToken(userDetails);
-        return GenerateApiResponse.createdResponse(jwt);
+        saveToken(jwt, applicantRequest.getEmailAddress());
+        return GenerateApiResponse.createdResponse(GenerateApiResponse.BEARER+jwt);
 
     }
 
@@ -67,5 +83,14 @@ public class ApplicantRegistrationService {
         roles.add(Roles.APPLICANT);
         user.setRoles(new HashSet<>(roles));
         return userService.save(user);
+    }
+    private void saveToken(String jwt, String emailAddress) {
+        Token token = Token.builder()
+                .jwt(jwt)
+                .isExpired(false)
+                .isRevoked(false)
+                .userEmailAddress(emailAddress)
+                .build();
+        tokenService.saveToken(token);
     }
 }

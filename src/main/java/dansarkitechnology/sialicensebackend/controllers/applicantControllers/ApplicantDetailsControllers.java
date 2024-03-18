@@ -17,7 +17,6 @@ public class ApplicantDetailsControllers {
 
     @GetMapping("applicantDetails")
     public ResponseEntity<ApiResponse> findApplicantDetails(@RequestParam String applicantEmailAddress){
-        System.out.println("I'm the applicant emailAddress :" + applicantEmailAddress);
         return new ResponseEntity<>(applicantService.findApplicantDetails(applicantEmailAddress), HttpStatus.OK);
     }
 }

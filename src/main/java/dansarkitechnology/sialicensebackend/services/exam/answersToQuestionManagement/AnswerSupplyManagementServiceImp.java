@@ -26,7 +26,6 @@ public class AnswerSupplyManagementServiceImp implements AnswerSupplyManagementS
     @Transactional
     public ApiResponse supplyAnswerToQuestion(AnswerSuppliedToQuestionRequest answerSuppliedToQuestionRequest) throws QuestionException {
 
-        System.out.println(answerSuppliedToQuestionRequest.getAnswerSupplied());
         Optional<Exam> foundExam = examService.findExamById(answerSuppliedToQuestionRequest.getExamId());
         if (foundExam.isEmpty()) throw new ExamException(GenerateApiResponse.NO_EXAMINATION_FOUND);
 
@@ -95,6 +94,5 @@ public class AnswerSupplyManagementServiceImp implements AnswerSupplyManagementS
           if(foundUserAnswerDetails.getUserAnswer().equalsIgnoreCase(answerSuppliedToQuestionRequest.getAnswerSupplied())&&
                   (foundUserAnswerDetails.isCorrectOptionChosen())) throw new ExamException(GenerateApiResponse.VALUE_INPUT_CURRENTLY_CHOSEN);
         }
-
 }
 }

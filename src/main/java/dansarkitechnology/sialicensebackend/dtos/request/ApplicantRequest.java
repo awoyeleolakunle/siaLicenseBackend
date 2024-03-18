@@ -13,6 +13,7 @@ import lombok.*;
 public class ApplicantRequest {
 
     @NotBlank
+    @NotEmpty
     @Email(message = "Email should be valid")
     private String emailAddress;
     @NotBlank

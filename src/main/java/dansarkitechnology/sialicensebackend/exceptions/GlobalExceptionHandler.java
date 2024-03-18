@@ -114,4 +114,14 @@ public class GlobalExceptionHandler {
                 .isSuccessful(false)
                 .build(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(SessionTimeOutException.class)
+    public ResponseEntity<ApiResponse> sessionTimeOutException(SessionTimeOutException sessionTimeOutException){
+    return new ResponseEntity<>(ApiResponse.builder()
+            .data(sessionTimeOutException.getMessage())
+            .httpStatus(HttpStatus.UNAUTHORIZED)
+            .status(HttpStatus.UNAUTHORIZED.value())
+            .isSuccessful(false)
+            .build(), HttpStatus.UNAUTHORIZED);
+    }
 }

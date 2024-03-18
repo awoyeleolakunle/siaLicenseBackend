@@ -35,7 +35,6 @@ public class TrainingSessionServiceImp implements TrainingSessionService {
     public ApiResponse createTrainingSession(TrainingSessionRequest trainingSessionRequest) {
 
         Center center = centerService.findCenterByEmailAddress(trainingSessionRequest.getCenterEmailAddress());
-        System.out.println("I'm the center email address : "+ trainingSessionRequest.getCenterEmailAddress());
         TrainingSession trainingSession = modelMapper.map(trainingSessionRequest, TrainingSession.class);
         trainingSession.setTrainingType(TrainingType.valueOf(trainingSessionRequest.getTrainingType().toUpperCase()));
         trainingSession.setCenterCity(center.getCity());

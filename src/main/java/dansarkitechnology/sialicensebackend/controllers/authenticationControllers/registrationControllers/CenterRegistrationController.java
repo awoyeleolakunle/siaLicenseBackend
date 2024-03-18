@@ -3,6 +3,7 @@ package dansarkitechnology.sialicensebackend.controllers.authenticationControlle
 
 import dansarkitechnology.sialicensebackend.Utils.ApiResponse;
 import dansarkitechnology.sialicensebackend.dtos.request.CenterRequest;
+import dansarkitechnology.sialicensebackend.exceptions.AccountException;
 import dansarkitechnology.sialicensebackend.exceptions.CenterException;
 import dansarkitechnology.sialicensebackend.services.authentication.CenterRegistrationService;
 import jakarta.validation.Valid;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class CenterRegistrationController {
     private final CenterRegistrationService registrationService;
     @PostMapping("register")
-public ResponseEntity<ApiResponse> registerCenter(@RequestBody @Valid CenterRequest centerRequest) throws CenterException {
+public ResponseEntity<ApiResponse> registerCenter(@RequestBody @Valid CenterRequest centerRequest) throws CenterException, AccountException {
         return new ResponseEntity<>(registrationService.registerCenter(centerRequest), HttpStatus.CREATED);
     }
 }
